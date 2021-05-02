@@ -8,6 +8,14 @@ var app = require('../app');
 var debug = require('debug')('the-continental:server');
 var http = require('http');
 
+const mysql = require ('mysql2');
+const pool = mysql.createPool({
+  host: 				'localhost',
+  user: 				'root',
+  password: 			'root',
+  database: 			'the_continental',
+  waitForConnections: true
+});
 /**
  * Get port from environment and store in Express.
  */

@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var hotelRouter = require('./routes/hotel');
-
+var circuitRouter = require('./routes/circuit');
 var app = express();
 
 // view engine setup
