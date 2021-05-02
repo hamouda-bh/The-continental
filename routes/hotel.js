@@ -5,7 +5,7 @@ const mysql = require ('mysql2');
 const pool = mysql.createPool({
     host: 				'localhost',
     user: 				'root',
-    password: 			'',
+    password: 			'root',
     database: 			'the_continental',
     waitForConnections: true
 });
@@ -64,7 +64,8 @@ router.get('/getAllHotels',function(req,res){
 })
 
 router.get('/getNuitSingle/:name',function(req,res){
-    pool.query("SELECT prix_nuit_single FROM `hotel` WHERE `hotel`.`name` = ?;\n"
+    pool.query("SELECT prix_nuit_single FROM `hotel` where `hotel`.`name` = ?;\n"
+        ,[req.params.name]
         ,function(error, result,champs){
             if (error){
                 res.send("Not available");
@@ -74,7 +75,8 @@ router.get('/getNuitSingle/:name',function(req,res){
         })
 })
 router.get('/getNuitdouble/:name',function(req,res){
-    pool.query("SELECT prix_nuit_double FROM `hotel` WHERE `hotel`.`name` = ${req.params.name};\n"
+    pool.query("SELECT prix_nuit_double FROM `hotel` where `hotel`.`name` = ?;\n"
+        ,[req.params.name]
         ,function(error, result,champs){
             if (error){
                 res.send("Not available");
@@ -84,7 +86,8 @@ router.get('/getNuitdouble/:name',function(req,res){
         })
 })
 router.get('/getNuitTriple/:name',function(req,res){
-    pool.query("SELECT prix_nuit_trple FROM `hotel` WHERE `hotel`.`name` = ?;\n"
+    pool.query("SELECT prix_nuit_triple FROM `hotel` where `hotel`.`name` = ?;\n"
+        ,[req.params.name]
         ,function(error, result,champs){
             if (error){
                 res.send("Not available");
