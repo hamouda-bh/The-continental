@@ -3,12 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+ require('./models/db.js');
+ require('./models/hotel.model.js');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var hotelRouter = require('./routes/hotel');
 var loginRouter = require('./routes/login');
 var transRouter = require('./routes/transport');
+var usersRouter = require('./routes/users');
 
 var app = express();
 
