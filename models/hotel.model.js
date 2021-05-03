@@ -44,8 +44,27 @@ Hotel.findById = (hotelId, result) => {
     });
 };
 
+Hotel.findPromos = (name,date, result) => {
+    sql.query(`SELECT prix_nuit_single,prix_nuit_double,prix_nuit_triple FROM hotel WHERE name = ?`,name, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("found hotel: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+
+        // not found Customer with the id
+        result({ kind: "not_found" }, null);
+    });
+};
+
 Hotel.findByNuitSingle = (name, result) => {
-    sql.query(`SELECT prix_nuit_single FROM hotel WHERE name = ? `, (err, res) => {
+    sql.query(`SELECT prix_nuit_single FROM hotel WHERE name = ? `,name, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -61,22 +80,7 @@ Hotel.findByNuitSingle = (name, result) => {
 };
 
 Hotel.findByNuitDouble = (name, result) => {
-    sql.query(`SELECT prix_nuit_double FROM hotel WHERE name = ? `, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
-        if (res.length) {
-            console.log("found hotel: ", res[0]);
-            result(null, res[0]);
-            return;
-        }
-        result({ kind: "not_found" }, null);
-    });
-};
-Hotel.findByNuitTriple= (name, result) => {
-    sql.query(`SELECT prix_nuit_triple FROM hotel WHERE name = ? `, (err, res) => {
+    sql.query(`SELECT prix_nuit_double FROM hotel WHERE name = ? `,name, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -91,6 +95,21 @@ Hotel.findByNuitTriple= (name, result) => {
     });
 };
 
+Hotel.findByNuitTriple= (name, result) => {
+    sql.query(`SELECT prix_nuit_triple FROM hotel WHERE name = ? `,name, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            console.log("found hotel: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+        result({ kind: "not_found" }, null);
+    });
+};
 
 Hotel.getAll = result => {
     sql.query("SELECT * FROM hotel", (err, res) => {
@@ -148,7 +167,6 @@ Hotel.removeId = (id, result) => {
         result(null, res);
     });
 };
-
 
 Hotel.removeName = (name, result) => {
     sql.query("DELETE FROM hotel WHERE name = ?", name, (err, res) => {
