@@ -52,15 +52,14 @@ Hotel.findPromos = (name,date, result) => {
             result(err, null);
             return;
         }
-
- if (((new Date(date)).getMonth()==6) || ((new Date(date)).getMonth()==7)) {
-    for (const item of res)
-    {
+    if (((new Date(date)).getMonth()==6) || ((new Date(date)).getMonth()==7)) {
+        for (const item of res) {
         retour.push({
             prix_nuit_single: item.prix_nuit_single + item.prix_nuit_single*10/100,
             prix_nuit_double: item.prix_nuit_double + item.prix_nuit_double*10/100,
             prix_nuit_triple: item.prix_nuit_triple + item.prix_nuit_triple*10/100
         })
+
     }
      if (res.length) {
          console.log("found hotel: ", retour);
