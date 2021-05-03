@@ -45,6 +45,7 @@ Hotel.findById = (hotelId, result) => {
 };
 
 Hotel.findPromos = (name,date, result) => {
+    var retour =[];
     sql.query(`SELECT prix_nuit_single,prix_nuit_double,prix_nuit_triple FROM hotel WHERE name = ?`,name, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -52,13 +53,41 @@ Hotel.findPromos = (name,date, result) => {
             return;
         }
 
-        if (res.length) {
-            console.log("found hotel: ", res[0]);
-            result(null, res[0]);
+ if (((new Date(date)).getMonth()==6) || ((new Date(date)).getMonth()==7)) {
+    for (const item of res)
+    {
+        retour.push({
+            prix_nuit_single: item.prix_nuit_single + item.prix_nuit_single*10/100,
+            prix_nuit_double: item.prix_nuit_double + item.prix_nuit_double*10/100,
+            prix_nuit_triple: item.prix_nuit_triple + item.prix_nuit_triple*10/100
+        })
+    }
+     if (res.length) {
+         console.log("found hotel: ", retour);
+         result(null, retour);
+         return;
+     }
+ }else if (((new Date(date)).getMonth()==8)|| ((new Date(date)).getMonth()==9))
+ {
+     for (const x of res)
+     {
+         retour.push({
+             prix_nuit_single: x.prix_nuit_single - x.prix_nuit_single*10/100,
+             prix_nuit_double: x.prix_nuit_double - x.prix_nuit_double*10/100,
+             prix_nuit_triple: x.prix_nuit_triple - x.prix_nuit_triple*10/100
+         })
+     }
+     if (res.length) {
+         console.log("found hotel: ", retour);
+         result(null, retour);
+         return;
+     }
+ }
+     if (res.length) {
+            console.log("found hotel: ", res);
+            result(null, res);
             return;
         }
-
-        // not found Customer with the id
         result({ kind: "not_found" }, null);
     });
 };
