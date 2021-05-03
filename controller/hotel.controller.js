@@ -59,6 +59,23 @@ exports.findOne = (req, res) => {
         } else res.send(data);
     });
 };
+
+exports.findPromos = (req, res) => {
+    Hotel.findPromos(req.params.name,req.params.date,(err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found hotel with id ${req.params.name}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving hotel with id " + req.params.name
+                });
+            }
+        } else res.send(data);
+    });
+};
+
 exports.findByNuitSingle= (req, res) => {
     Hotel.findByNuitSingle(req.params.name, (err, data) => {
         if (err) {
