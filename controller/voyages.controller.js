@@ -1,15 +1,13 @@
 const Voyages = require("../models/voyages.model.js");
 
-// Create and Save a new Customer
+
 exports.create = (req, res) => {
-    // Validate request
     if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
     }
 
-    // Create a Customer
     const voyages = new Voyages({
         id_reservation: req.body.id_reservation,
         pays: req.body.pays,
@@ -19,100 +17,125 @@ exports.create = (req, res) => {
         date_fin: req.body.date_fin
     });
 
-    // Save Customer in the database
+
     Voyages.create(voyages, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while creating the hotel."
             });
-        else res.send(data);
-    });
-};
-///////////////////////////////////////////////////////////////////////
-/*
-// Retrieve all Customers from the database.
-exports.findAll = (req, res) => {
-    Voyages.getAll((err, data) => {
-        if (err)
+        else if(voyages.date_fin<voyages.date_debut)
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving hotels."
+                message: "les dates ne sont pas adéquats."
             });
         else res.send(data);
     });
 };
 
-// Find a single Customer with a customerId
+exports.findAll = (req, res) => {
+    Voyages.getAll((err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving voyages."
+            });
+        else res.send(data);
+    });
+};
+
 exports.findOne = (req, res) => {
-    Voyages.findById(req.params.voyagesId, (err, data) => {
+    Voyages.findById(req.params.voyageId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found hotel with id ${req.params.voyagesId}.`
+                    message: `Not found voyage with id ${req.params.voyageId}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Error retrieving hotel with id " + req.params.voyagesId
+                    message: "Error retrieving voyage with id " + req.params.voyageId
                 });
             }
         } else res.send(data);
     });
 };
-/*
-// Update a Customer identified by the customerId in the request
-exports.update = (req, res) => {
-    // Validate Request
+
+exports.updateD = (req, res) => {
     if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
     }
 
-    Hotel.updateById(
-        req.params.hotelId,
-        new Hotel(req.body),
+    Voyages.updateById_D(
+        req.params.voyagesId,
+        new Voyages(req.body),
         (err, data) => {
             if (err) {
                 if (err.kind === "not_found") {
                     res.status(404).send({
-                        message: `Not found hotel with id ${req.params.hotelId}.`
+                        message: `Not found Customer with id ${req.params.voyagesId}.`
                     });
                 } else {
                     res.status(500).send({
-                        message: "Error updating hotel with id " + req.params.hotelId
+                        message: "Error updating Customer with id " + req.params.voyagesId
+                    });
+                }
+
+            }
+            else res.send(data);
+        }
+    );
+};
+
+exports.updateF = (req, res) => {
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+    Voyages.updateById_F(
+        req.params.voyagesId,
+        new Voyages(req.body),
+        (err, data) => {
+            if (err) {
+                if (err.kind === "not_found") {
+                    res.status(404).send({
+                        message: `Not found Customer with id ${req.params.voyagesId}.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Error updating Customer with id " + req.params.voyagesId
                     });
                 }
             } else res.send(data);
         }
     );
-};*/
-/*
-// Delete a Customer with the specified customerId in the request
+};
+
 exports.delete = (req, res) => {
-    Hotel.remove(req.params.hotelId, (err, data) => {
+    Voyages.removeId(req.params.voyageId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found hotel with id ${req.params.hotelId}.`
+                    message: `Not found voyages with id ${req.params.voyageId}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Could not delete hotel with id " + req.params.hotelId
+                    message: "Could not delete voyages with id " + req.params.voyageId
                 });
             }
-        } else res.send({ message: `hotel was deleted successfully!` });
+        } else res.send({ message: `voyages was deleted successfully!` });
     });
 };
-// Delete all Customers from the database.
+
 exports.deleteAll = (req, res) => {
-    Hotel.removeAll((err, data) => {
+    Voyages.removeAll((err, data) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while removing all hotels."
+                    err.message || "Some error occurred while removing all voyages."
             });
-        else res.send({ message: `All hotels were deleted successfully!` });
+        else res.send({ message: `All voyages were deleted successfully!` });
     });
 };
-*/
