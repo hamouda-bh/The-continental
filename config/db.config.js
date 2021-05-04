@@ -1,7 +1,7 @@
 module.exports = {
     host: 				'localhost',
     user: 				'root',
-    password: 			'root',
-    database: 			'the_continental',
+    password: 			'',
+    database: 			'the_continental-2',
     waitForConnections: true
 };
