@@ -4,24 +4,28 @@ const router = express.Router()
 
 const Hotel = require('../controller/hotel.controller.js');
 
-router.post('/add', Hotel.create);
 
-router.get('/',Hotel.findAll);
-    // Create a new Customer
-   /* cntrl.post("/Hotel", Hotel.create);
 
-    // Retrieve all Hotel
-    cntrl.get("/Hotel/all", Hotel.findAll);
+    router.post('/add', Hotel.create);
 
-    // Retrieve a single Customer with customerId
-    cntrl.get("/Hotel/:hotelId", Hotel.findOne);
+    router.get('/all',Hotel.findAll);
 
-    // Update a Customer with customerId
-    cntrl.put("/Hotel/:hotelId", Hotel.update);
+    router.get("/nuitSingle/:name",Hotel.findByNuitSingle);
 
-    // Delete a Customer with customerId
-    cntrl.delete("/Hotel/:hotelId", Hotel.delete);
+    router.get("/nuitDouble/:name",Hotel.findByNuitDouble);
 
-    // Create a new Customer
-    cntrl.delete("/Hotel", Hotel.deleteAll);*/
+    router.get("/nuitTriple/:name",Hotel.findByNuitTriple);
+
+    router.get("/promo/:name/:date",Hotel.findPromos);
+
+    router.get("/findOne/:hotelId", Hotel.findOne);
+
+    // cntrl.put("/Hotel/:hotelId", Hotel.update);
+
+    router.delete("/deleteOne/:hotelId", Hotel.deleteId);
+
+    router.delete("/deleteName/:hotelName",Hotel.deleteName);
+
+    router.delete("/deleteAll", Hotel.deleteAll);
+
 module.exports= router;
