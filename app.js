@@ -2,14 +2,14 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
- require('./models/db.js');
- require('./models/hotel.model.js');
 var indexRouter = require('./routes/index');
 var hotelRouter = require('./routes/hotel');
 var usersRouter = require('./routes/users');
-
+var logger = require('morgan');
 var app = express();
+
+require('./models/db.js');
+require('./models/hotel.model.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

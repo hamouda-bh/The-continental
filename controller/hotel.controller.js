@@ -1,5 +1,4 @@
 const Hotel = require("../models/hotel.model.js");
-
 // Create and Save a new Customer
 exports.create = (req, res) => {
     // Validate request
@@ -31,15 +30,15 @@ exports.create = (req, res) => {
         else res.send(data);
     });
 };
-// Retrieve all Customers from the database.
+
 exports.findAll = (req, res) => {
-    Hotel.getAll((err, data) => {
+    Hotel.getAll((err, rows) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving hotels."
             });
-        else res.send(data);
+        else res.render('hotel', {hotels :rows});
     });
 };
 
@@ -164,7 +163,8 @@ exports.deleteId = (req, res) => {
                     message: "Could not delete hotel with id " + req.params.hotelId
                 });
             }
-        } else res.send({ message: `hotel was deleted successfully!` });
+        } else res.render('deleteOne');
+
     });
 };
 //delete name
