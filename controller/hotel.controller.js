@@ -20,7 +20,6 @@ exports.create = (req, res) => {
         prix_nuit_triple:req.body.prix_nuit_triple
     });
 
-    // Save Customer in the database
     Hotel.create(hotel, (err, data) => {
         if (err)
             res.status(500).send({
@@ -38,7 +37,7 @@ exports.findAll = (req, res) => {
                 message:
                     err.message || "Some error occurred while retrieving hotels."
             });
-        else res.render('hotel', {hotels :rows});
+        else res.render('hotelerie/hotel', {hotels :rows});
     });
 };
 
@@ -55,7 +54,8 @@ exports.findOne = (req, res) => {
                     message: "Error retrieving hotel with id " + req.params.hotelId
                 });
             }
-        } else res.send(data);
+        }   else res.render('hotelerie/oneHotel', {hotel :data});
+
     });
 };
 
@@ -64,14 +64,14 @@ exports.findPromos = (req, res) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found hotel with id ${req.params.name}.`
+                    message: `Not found hotel with name ${req.params.name}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Error retrieving hotel with id " + req.params.name
+                    message: "Error retrieving hotel with name " + req.params.name
                 });
             }
-        } else res.send(data);
+        } else res.render('hotelerie/promosHotel', {hotel :data});
     });
 };
 
@@ -87,7 +87,7 @@ exports.findByNuitSingle= (req, res) => {
                     message: "Error retrieving hotel with name " + req.params.name
                 });
             }
-        } else res.send(data);
+        } else res.render('hotelerie/prixNuitHotel', {hotel :data});
     });
 };
 exports.findByNuitDouble= (req, res) => {
@@ -103,7 +103,7 @@ exports.findByNuitDouble= (req, res) => {
                     message: "Error retrieving hotel with name " + req.params.name
                 });
             }
-        } else res.send(data);
+        } else res.render('hotelerie/prixNuitdouble', {hotel :data});
     });
 };
 exports.findByNuitTriple= (req, res) => {
@@ -118,7 +118,7 @@ exports.findByNuitTriple= (req, res) => {
                     message: "Error retrieving hotel with name " + req.params.name
                 });
             }
-        } else res.send(data);
+        } else res.render('hotelerie/prixNuitTriple', {hotel :data});
     });
 };
 
@@ -163,7 +163,8 @@ exports.deleteId = (req, res) => {
                     message: "Could not delete hotel with id " + req.params.hotelId
                 });
             }
-        } else res.render('deleteOne');
+        } else res.render('hotelerie/deleteOne', {hotels :data});
+
 
     });
 };

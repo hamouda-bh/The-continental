@@ -1,0 +1,18 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1>l'hotel</h1>
+    {% if hotel|length == 0 %}
+        Il n'y a aucun hotel à afficher.
+    {% else %}
+        <ul>
+            la nuit en single est à :
+            <br>
+
+                <li>prix de chaque chambre single : {{ hotel.prix_nuit_single }}</li>
+                <br>
+                <br>
+
+        </ul>
+    {% endif %}
+{% endblock %}
