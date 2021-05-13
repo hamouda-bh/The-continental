@@ -4,7 +4,7 @@ const Circuit = require("../models/circuit.model.js");
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
-        res.status(400).send({
+        res.status(400).render({
             message: "Content can not be empty!"
         });
     }
@@ -23,22 +23,22 @@ exports.create = (req, res) => {
     // Save Customer in the database
     Circuit.create(circuit, (err, data) => {
         if (err)
-            res.status(500).send({
+            res.status(500).render({
                 message:
                     err.message || "Some error occurred while creating the circuit."
             });
-        else res.send(data);
+        else res.render(data);
     });
 };
 // Retrieve all Customers from the database.
 exports.findAll = (req, res) => {
     Circuit.getAll((err, data) => {
         if (err)
-            res.status(500).send({
+            res.status(500).render({
                 message:
                     err.message || "Some error occurred while retrieving circuits."
             });
-        else res.send(data);
+        else res.render(data);
     });
 };
 
@@ -47,15 +47,15 @@ exports.findOne = (req, res) => {
     Circuit.findById(req.params.circuitId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
-                res.status(404).send({
+                res.status(404).render({
                     message: `Not found Customer with id ${req.params.circuitId}.`
                 });
             } else {
-                res.status(500).send({
+                res.status(500).render({
                     message: "Error retrieving Customer with id " + req.params.circuitId
                 });
             }
-        } else res.send(data);
+        } else res.render(data);
     });
 };
 /*
@@ -91,25 +91,25 @@ exports.delete = (req, res) => {
     Circuit.remove(req.params.circuitId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
-                res.status(404).send({
+                res.status(404).render({
                     message: `Not found hotel with id ${req.params.circuitId}.`
                 });
             } else {
-                res.status(500).send({
+                res.status(500).render({
                     message: "Could not delete hotel with id " + req.params.circuitId
                 });
             }
-        } else res.send({ message: `hotel was deleted successfully!` });
+        } else res.render({ message: `hotel was deleted successfully!` });
     });
 };
 // Delete all Customers from the database.
 exports.deleteAll = (req, res) => {
     Circuit.removeAll((err, data) => {
         if (err)
-            res.status(500).send({
+            res.status(500).render({
                 message:
                     err.message || "Some error occurred while removing all hotels."
             });
-        else res.send({ message: `All hotels were deleted successfully!` });
+        else res.render({ message: `All hotels were deleted successfully!` });
     });
 };
