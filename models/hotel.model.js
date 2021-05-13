@@ -39,6 +39,24 @@ Hotel.findById = (hotelId, result) => {
             return;
         }
 
+        result({ kind: "not_found" }, null);
+    });
+};
+
+Hotel.findByGouv = (gouvernorat, result) => {
+    sql.query(`SELECT * FROM hotel WHERE gouvernorat = ?`,gouvernorat, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("found hotel: ", res);
+            result(null, res);
+            return;
+        }
+
         // not found Customer with the id
         result({ kind: "not_found" }, null);
     });
@@ -46,7 +64,7 @@ Hotel.findById = (hotelId, result) => {
 
 Hotel.findPromos = (name,date, result) => {
     var retour =[];
-    sql.query(`SELECT prix_nuit_single,prix_nuit_double,prix_nuit_triple FROM hotel WHERE name = ?`,name, (err, res) => {
+    sql.query(`SELECT * FROM hotel WHERE name = ?`,name, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -55,6 +73,9 @@ Hotel.findPromos = (name,date, result) => {
     if (((new Date(date)).getMonth()==6) || ((new Date(date)).getMonth()==7)) {
         for (const item of res) {
         retour.push({
+            id : item.id,
+            name: item.name,
+            gouvernorat :item.gouvernorat,
             prix_nuit_single: item.prix_nuit_single + item.prix_nuit_single*10/100,
             prix_nuit_double: item.prix_nuit_double + item.prix_nuit_double*10/100,
             prix_nuit_triple: item.prix_nuit_triple + item.prix_nuit_triple*10/100
@@ -71,6 +92,9 @@ Hotel.findPromos = (name,date, result) => {
      for (const x of res)
      {
          retour.push({
+             id: item.id,
+             name: item.name,
+             gouvernorat :item.gouvernorat,
              prix_nuit_single: x.prix_nuit_single - x.prix_nuit_single*10/100,
              prix_nuit_double: x.prix_nuit_double - x.prix_nuit_double*10/100,
              prix_nuit_triple: x.prix_nuit_triple - x.prix_nuit_triple*10/100
@@ -151,11 +175,11 @@ Hotel.getAll = result => {
     });
 };
 
-/*
+
 Hotel.updateById = (id, hotel, result) => {
     sql.query(
-        "UPDATE hotel SET name = ?, gouvernorat = ?, nbr_chambre_double = ? WHERE id = ?",
-        [customer.email, customer.name, customer.active, id],
+        "UPDATE hotel SET name = ?, gouvernorat = ? ,nbr_chambre_double = ?,nbr_chambre_single = ?,nbr_chambre_triple = ?, prix_nuit_single = ?, prix_nuit_double = ?, prix_nuit_triple = ?   WHERE id = ?",
+        [ hotel.name, hotel.gouvernorat,hotel.nbr_chambre_double, hotel.nbr_chambre_single, hotel.nbr_chambre_triple, hotel.prix_nuit_single, hotel.prix_nuit_double, hotel.prix_nuit_triple, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -164,17 +188,15 @@ Hotel.updateById = (id, hotel, result) => {
             }
 
             if (res.affectedRows == 0) {
-                // not found Customer with the id
                 result({ kind: "not_found" }, null);
                 return;
             }
-
-            console.log("updated customer: ", { id: id, ...customer });
-            result(null, { id: id, ...customer });
+            console.log("updated hotel: ", { id: id, ...hotel });
+            result(null, { id: id, ...hotel });
         }
     );
 };
-*/
+
 
 Hotel.removeId = (id, result) => {
     sql.query("DELETE FROM hotel WHERE id = ?", id, (err, res) => {

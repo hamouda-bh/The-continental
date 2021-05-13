@@ -20,12 +20,16 @@ const Hotel = require('../controller/hotel.controller.js');
 
     router.get("/findOne/:hotelId", Hotel.findOne);
 
-    // cntrl.put("/Hotel/:hotelId", Hotel.update);
+    router.get("/findGouv/:gouvernorat", Hotel.findGouv);
+
+    router.put("/updateHotel/:hotelId", Hotel.update);
 
     router.delete("/deleteOne/:hotelId", Hotel.deleteId);
 
     router.delete("/deleteName/:hotelName",Hotel.deleteName);
 
     router.delete("/deleteAll", Hotel.deleteAll);
+
+    router.get("/form",Hotel.ahla);
 
 module.exports= router;
