@@ -3,6 +3,7 @@
   {% block stylesheets %}
       <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
       <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
   {% endblock %}
 
@@ -53,7 +54,7 @@
     </nav>
     <div id="main">
     <div class="inner">
-    <h3>Gestion des hotels <span class="pull-right">Affichage de tout les hotels</span></h3>
+    <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Affichage de tout les hotels</span></h3>
 
     <div class="container-fluid">
  <section>
@@ -74,7 +75,7 @@
             </form>
         </section>
     <div class="table-responsive">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
             <thead>
             <tr>
                 <th>Nom hotel</th>
@@ -110,8 +111,8 @@
      <td> <button class="btn btn-outline-success"  onclick="addHotel()"  >add hotel</button></td>
 
 </div>
-<br><br><br><br>
-        <h3><span class="pull-right">chercher prix par date</span></h3>
+<br><br>
+        <h3><span class="pull-right"style="color: #148599">chercher prix par date</span></h3>
 <br>
 
         <div style="text-align: center;">
@@ -152,6 +153,10 @@
     <script src="/javascripts/jquery.scrolly.min.js"></script>
     <script src="/javascripts/jquery.scrollex.min.js"></script>
     <script src="/javascripts/main.js"></script>
+    <script type="text/javascript" src='/javascripts/jquery.js'></script>
+    <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>
+
+
 <script>
 
 function deleteOne (id){
@@ -168,8 +173,18 @@ location.reload()
 function findOne (id){
 location.href="http://localhost:3000/hotel/findOne/"+id
 }
-function deleteall (){
-location.href="http://localhost:3000/hotel/deleteAll"
+function deleteall(){
+
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/hotel/deleteAll",
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+    })
+
+location.href="http://localhost:3000"
 }
 
 function addHotel (){
@@ -182,7 +197,6 @@ location.href="http://localhost:3000/hotel/form"
     location.href="http://localhost:3000/hotel/promo/"+$('#nom').val()+"/"+$('#date').val()
   })
 
-
  $('#formulaire2').on("submit",function (e){
      e.preventDefault()
 
@@ -191,8 +205,9 @@ location.href="http://localhost:3000/hotel/form"
     location.href="http://localhost:3000/hotel/findGouv/"+$( "#gouvernorat option:selected" ).text();
 
   })
-
-
+  $(document).ready(function () {
+    $('#tab').DataTable();
+});
 </script>
 
 

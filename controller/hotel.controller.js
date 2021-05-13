@@ -145,10 +145,7 @@ exports.findByNuitTriple= (req, res) => {
 };
 
 
-/*
-
 exports.update = (req, res) => {
-    // Validate Request
     if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -156,7 +153,7 @@ exports.update = (req, res) => {
     }
 
     Hotel.updateById(
-        req.params.hotelId,
+
         new Hotel(req.body),
         (err, data) => {
             if (err) {
@@ -170,9 +167,9 @@ exports.update = (req, res) => {
                     });
                 }
             } else res.send(data);
-        }
+        },req.params.hotelId
     );
-};*/
+};
 exports.deleteId = (req, res) => {
     Hotel.removeId(req.params.hotelId, (err, data) => {
         if (err) {

@@ -3,6 +3,7 @@
   {% block stylesheets %}
       <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
       <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
   {% endblock %}
 
@@ -53,7 +54,7 @@
     </nav>
     <div id="main">
     <div class="inner">
-    <h3>Gestion des hotels <span class="pull-right">Affichage des hotels dans ce gouvernorat</span></h3>
+    <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Affichage des hotels dans ce gouvernorat</span></h3>
 
     <div class="container-fluid">
 
@@ -104,6 +105,9 @@
     <script src="/javascripts/jquery.scrolly.min.js"></script>
     <script src="/javascripts/jquery.scrollex.min.js"></script>
     <script src="/javascripts/main.js"></script>
+    <script type="text/javascript" src='/javascripts/jquery.js'></script>
+    <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>
+
 <script>
 
 function deleteOne (id){
@@ -123,6 +127,8 @@ location.href="http://localhost:3000/hotel/findOne/"+id
 function deleteall (){
 location.href="http://localhost:3000/hotel/deleteAll"
 }
-
+$(document).ready(function () {
+    $('#tab').DataTable();
+});
 </script>
 {% endblock %}

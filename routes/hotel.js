@@ -22,7 +22,7 @@ const Hotel = require('../controller/hotel.controller.js');
 
     router.get("/findGouv/:gouvernorat", Hotel.findGouv);
 
-// cntrl.put("/Hotel/:hotelId", Hotel.update);
+    router.put("/updateHotel/:hotelId", Hotel.update);
 
     router.delete("/deleteOne/:hotelId", Hotel.deleteId);
 

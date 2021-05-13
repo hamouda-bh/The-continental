@@ -39,7 +39,6 @@ Hotel.findById = (hotelId, result) => {
             return;
         }
 
-        // not found Customer with the id
         result({ kind: "not_found" }, null);
     });
 };
@@ -176,11 +175,11 @@ Hotel.getAll = result => {
     });
 };
 
-/*
+
 Hotel.updateById = (id, hotel, result) => {
     sql.query(
-        "UPDATE hotel SET name = ?, gouvernorat = ?, nbr_chambre_double = ? WHERE id = ?",
-        [customer.email, customer.name, customer.active, id],
+        "UPDATE hotel SET name = ?, gouvernorat = ? ,nbr_chambre_double = ?,nbr_chambre_single = ?,nbr_chambre_triple = ?, prix_nuit_single = ?, prix_nuit_double = ?, prix_nuit_triple = ?   WHERE id = ?",
+        [ hotel.name, hotel.gouvernorat,hotel.nbr_chambre_double, hotel.nbr_chambre_single, hotel.nbr_chambre_triple, hotel.prix_nuit_single, hotel.prix_nuit_double, hotel.prix_nuit_triple, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -189,17 +188,15 @@ Hotel.updateById = (id, hotel, result) => {
             }
 
             if (res.affectedRows == 0) {
-                // not found Customer with the id
                 result({ kind: "not_found" }, null);
                 return;
             }
-
-            console.log("updated customer: ", { id: id, ...customer });
-            result(null, { id: id, ...customer });
+            console.log("updated hotel: ", { id: id, ...hotel });
+            result(null, { id: id, ...hotel });
         }
     );
 };
-*/
+
 
 Hotel.removeId = (id, result) => {
     sql.query("DELETE FROM hotel WHERE id = ?", id, (err, res) => {
