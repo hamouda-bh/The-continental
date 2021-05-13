@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 var personnelleRouter = require ('./routes/personnelle');
 
 var logger = require('morgan');
+var logger = require('morgan');
 var app = express();
 
 require('./models/db.js');

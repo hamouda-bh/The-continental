@@ -1,24 +1,214 @@
 {% extends 'layout.twig' %}
 
-{% block body %}
-    <h1>les hotels</h1>
-    {% if hotels|length == 0 %}
-    Il n'y a aucun hotel à afficher.
-    {% else %}
-        <ul>
-        {% for hotel in hotels %}
-                <li>name : {{ hotel.name }}</li>
-                <li>gouvernorat : {{ hotel.gouvernorat }}</li>
-                <li>nombre des chambres single : {{ hotel.nbr_chambre_single }}</li>
-                <li>nombre des chambres double : {{ hotel.nbr_chambre_double }}</li>
-                <li>nombre des chambres triple : {{ hotel.nbr_chambre_triple }}</li>
-                <li>prix de chaque chambre single : {{ hotel.prix_nuit_single }}</li>
-                <li>prix de chaque chambre double : {{ hotel.prix_nuit_double }}</li>
-                <li>prix de chaque chambre triple : {{ hotel.prix_nuit_triple }}</li>
+  {% block stylesheets %}
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
+      <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
+  {% endblock %}
 
-            <br>
-            <br>
-        {% endfor %}
-    </ul>
-    {% endif %}
+{% block body %}
+
+    <div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+
+            <!-- Logo -->
+            <a href="fichiersHtml/index.html" class="logo">
+                <span class="fa fa-plane"></span> <span class="title">The continental</span>
+            </a>
+
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="fichiersHtml/index.html">Home</a></li>
+
+            <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
+
+            <li><a href="fichiersHtml/blog.html">Blog</a></li>
+
+            <li>
+                <a href="#" class="dropdown-toggle">About</a>
+
+                <ul>
+                    <li><a href="fichiersHtml/about.html">About Us</a></li>
+                    <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
+                    <li><a href="fichiersHtml/terms.html">Terms</a></li>
+                </ul>
+            </li>
+            <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+    <div id="main">
+    <div class="inner">
+    <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Affichage de tout les hotels</span></h3>
+
+    <div class="container-fluid">
+ <section>
+            <form id ="formulaire2" >
+				<div class="fields">
+                    <div class="field quarter">
+                        <SELECT name="gouvernorat" id="gouvernorat" size="1">
+                             <OPTION>tunis
+                             <OPTION>monastir
+                             <OPTION>hammamet
+                             <OPTION>sousse
+                        </SELECT>
+                    </div>
+                    <div class="field half">
+                    <button class="btn btn-outline-info" type="submit" >chercher</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    <div class="table-responsive">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
+            <thead>
+            <tr>
+                <th>Nom hotel</th>
+                <th>Gouvernorat</th>
+                <th>prix des chambres single</th>
+                <th>prix des chambres double</th>
+                <th>prix des chambres triple</th>
+                <th>Suppression</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            {% if hotels|length == 0 %}
+            Il n'y a aucun hotel à afficher.
+            {% else %}
+
+            <tbody>
+                {% for hotel in hotels %}
+            <tr>
+                <td>{{ hotel.name }}</td>
+                <td>{{ hotel.gouvernorat }}</td>
+                <td>{{ hotel.prix_nuit_single }}</td>
+                <td>{{ hotel.prix_nuit_double }}</td>
+                <td>{{ hotel.prix_nuit_triple }}</td>
+                <td> <button class="btn btn-outline-danger" onclick="deleteOne({{hotel.id}})" >remove </button></td>
+                <td> <button class="btn btn-outline-primary" onclick="findOne({{ hotel.id }})">details </button></td>
+            </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table></div>
+        <div style="text-align: center;">
+     <td> <button class="btn btn-outline-danger" onclick="deleteall()">remove all</button></td>
+     <td> <button class="btn btn-outline-success"  onclick="addHotel()"  >add hotel</button></td>
+
+</div>
+<br><br>
+        <h3><span class="pull-right"style="color: #148599">chercher prix par date</span></h3>
+<br>
+
+        <div style="text-align: center;">
+        <section>
+            <form id ="formulaire1">
+				<div class="fields">
+                    <div class="field quarter">
+                    <label>date d'arrivé :</label>
+                        <input id="date" type="date" placeholder="From 08.07.2020" />
+                        <input id="nom" type="text" placeholder="Name" />
+                    </div>
+                    <div class="field half">
+                    <button class="btn btn-outline-info" type="submit" >chercher les prix</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+<br>
+<br>
+<br>
+
+</div></div></div>
+
+
+
+
+
+
+
+
+
+
+
+ {% endblock %}
+  {% block javascriptsAtTheEnd %}
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/jquery.scrolly.min.js"></script>
+    <script src="/javascripts/jquery.scrollex.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+    <script type="text/javascript" src='/javascripts/jquery.js'></script>
+    <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>
+
+
+<script>
+
+function deleteOne (id){
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/hotel/deleteOne/"+id,
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+})
+location.reload()
+}
+function findOne (id){
+location.href="http://localhost:3000/hotel/findOne/"+id
+}
+function deleteall(){
+
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/hotel/deleteAll",
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+    })
+
+location.href="http://localhost:3000"
+}
+
+function addHotel (){
+location.href="http://localhost:3000/hotel/form"
+}
+
+
+ $('#formulaire1').on("submit",function (e){
+    e.preventDefault()
+    location.href="http://localhost:3000/hotel/promo/"+$('#nom').val()+"/"+$('#date').val()
+  })
+
+ $('#formulaire2').on("submit",function (e){
+     e.preventDefault()
+
+
+
+    location.href="http://localhost:3000/hotel/findGouv/"+$( "#gouvernorat option:selected" ).text();
+
+  })
+  $(document).ready(function () {
+    $('#tab').DataTable();
+});
+</script>
+
+
 {% endblock %}
