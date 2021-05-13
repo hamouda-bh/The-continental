@@ -28,4 +28,8 @@ const Hotel = require('../controller/hotel.controller.js');
 
     router.delete("/deleteAll", Hotel.deleteAll);
 
+ //   router.get('index',(req,res)=>{
+    //    res.render('index');
+   // });
+
 module.exports= router;
