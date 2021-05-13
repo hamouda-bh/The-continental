@@ -1,22 +1,134 @@
 {% extends 'layout.twig' %}
 
-{% block body %}
-    <h1>l'hotel</h1>
-    {% if hotel|length == 0 %}
-        Il n'y a aucun hotel à afficher.
-    {% else %}
-        <ul>
-                <li>name : {{ hotel.name }}</li>
-                <li>gouvernorat : {{ hotel.gouvernorat }}</li>
-                <li>nombre des chambres single : {{ hotel.nbr_chambre_single }}</li>
-                <li>nombre des chambres double : {{ hotel.nbr_chambre_double }}</li>
-                <li>nombre des chambres triple : {{ hotel.nbr_chambre_triple }}</li>
-                <li>prix de chaque chambre single : {{ hotel.prix_nuit_single }}</li>
-                <li>prix de chaque chambre double : {{ hotel.prix_nuit_double }}</li>
-                <li>prix de chaque chambre triple : {{ hotel.prix_nuit_triple }}</li>
+  {% block stylesheets %}
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
+  {% endblock %}
 
-                <br>
-                <br>
+{% block body %}
+
+    <div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+
+            <!-- Logo -->
+            <a href="fichiersHtml/index.html" class="logo">
+                <span class="fa fa-plane"></span> <span class="title">The continental</span>
+            </a>
+
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="fichiersHtml/index.html">Home</a></li>
+
+            <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
+
+            <li><a href="fichiersHtml/blog.html">Blog</a></li>
+
+            <li>
+                <a href="#" class="dropdown-toggle">About</a>
+
+                <ul>
+                    <li><a href="fichiersHtml/about.html">About Us</a></li>
+                    <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
+                    <li><a href="fichiersHtml/terms.html">Terms</a></li>
+                </ul>
+            </li>
+            <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
         </ul>
-    {% endif %}
+    </nav>
+    <div id="main">
+    <div class="inner">
+    <h3>Detail de l'hotel </h3>
+
+    <div class="container-fluid">
+
+    <div class="table-responsive">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
+            <thead>
+            <tr>
+                <th>Nom hotel</th>
+                <th>Gouvernorat</th>
+                <th>Nombre des chambres single</th>
+                <th>Nombre des chambres double</th>
+                <th>Nombre des chambres triple</th>
+                <th>prix des chambres single</th>
+                <th>prix des chambres double</th>
+                <th>prix des chambres triple</th>
+                <th>Suppression</th>
+
+            </tr>
+            </thead>
+            {% if hotel|length == 0 %}
+            Il n'y a aucun hotel à afficher.
+            {% else %}
+
+            <tbody>
+            <tr>
+                <td>{{ hotel.name }}</td>
+                <td><input type="text" value="{{ hotel.gouvernorat }}"/></td>
+                <td>{{ hotel.nbr_chambre_single }}</td>
+                <td>{{ hotel.nbr_chambre_double }}</td>
+                <td>{{ hotel.nbr_chambre_triple }}</td>
+                <td>{{ hotel.prix_nuit_single }}</td>
+                <td>{{ hotel.prix_nuit_double }}</td>
+                <td>{{ hotel.prix_nuit_triple }}</td>
+                <td> <button class="btn btn-outline-danger" onclick="deleteOne({{hotel.id}})" >remove </button></td>
+            </tr>
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
+
+    <br>
+
+
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+ {% endblock %}
+  {% block javascriptsAtTheEnd %}
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/jquery.scrolly.min.js"></script>
+    <script src="/javascripts/jquery.scrollex.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+<script>
+    function deleteOne (id){
+        $.ajax({
+            type: 'delete',
+            url: "http://localhost:3000/hotel/deleteOne/"+id,
+            dataType: 'json',
+            async: false,
+            success: (result) => {
+            }
+        })
+        location.href="http://localhost:3000/hotel/all"
+    }
+</script>
 {% endblock %}

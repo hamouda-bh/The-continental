@@ -30,6 +30,11 @@ exports.create = (req, res) => {
     });
 };
 
+
+exports.ahla = (req, res) => {
+   res.render('hotelerie/addHotel');
+};
+
 exports.findAll = (req, res) => {
     Hotel.getAll((err, rows) => {
         if (err)
@@ -55,6 +60,23 @@ exports.findOne = (req, res) => {
                 });
             }
         }   else res.render('hotelerie/oneHotel', {hotel :data});
+
+    });
+};
+
+exports.findGouv = (req, res) => {
+    Hotel.findByGouv(req.params.gouvernorat, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found hotel with gouvernorat ${req.params.gouvernorat}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving hotel with gouvernorat " + req.params.gouvernorat
+                });
+            }
+        }   else res.render('hotelerie/findGouv', {hotels :data});
 
     });
 };
@@ -163,7 +185,7 @@ exports.deleteId = (req, res) => {
                     message: "Could not delete hotel with id " + req.params.hotelId
                 });
             }
-        } else res.render('hotelerie/deleteOne', {hotels :data});
+        } else res.render('hotelerie/hotel', {hotels :data});
 
 
     });
