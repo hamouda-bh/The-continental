@@ -13,7 +13,10 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^2.2.5",
-    "twig": "^0.10.3"
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "twig": "~0.10.3"
+
   },
   "description": "Ceci est le repos partagé de l'équipe continental",
   "main": "Server.js",
