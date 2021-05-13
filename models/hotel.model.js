@@ -146,9 +146,8 @@ Hotel.getAll = result => {
             result(null, err);
             return;
         }
-
         console.log("hotels: ", res);
-        result(null, res);
+      result(null, res);
     });
 };
 
