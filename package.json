@@ -13,7 +13,24 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^2.2.5",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "node": "^16.0.0",
     "node": "^16.0.0",
     "twig": "~0.10.3"
-  }
+
+  },
+  "description": "Ceci est le repos partagé de l'équipe continental",
+  "main": "Server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamouda-bh/The-continental.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamouda-bh/The-continental/issues"
+  },
+  "homepage": "https://github.com/hamouda-bh/The-continental#readme"
 }

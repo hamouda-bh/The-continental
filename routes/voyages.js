@@ -1,0 +1,20 @@
+const express = require('express')
+const router = express.Router()
+
+const Voyages = require('../controller/voyages.controller.js');
+
+router.post('/add', Voyages.create);
+
+router.get('/all',Voyages.findAll);
+
+router.get("/findOne/:voyageId", Voyages.findOne);
+
+router.delete("/deleteOne/:voyageId", Voyages.delete);
+
+router.delete("/deleteAll", Voyages.deleteAll);
+
+router.put("/updateDD/:voyagesId", Voyages.updateD);
+
+router.put("/updateDF/:voyagesId", Voyages.updateF);
+
+module.exports= router;

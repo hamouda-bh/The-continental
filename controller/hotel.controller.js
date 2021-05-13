@@ -1,5 +1,4 @@
 const Hotel = require("../models/hotel.model.js");
-
 // Create and Save a new Customer
 exports.create = (req, res) => {
     // Validate request
@@ -13,10 +12,14 @@ exports.create = (req, res) => {
     const hotel = new Hotel({
         name: req.body.name,
         gouvernorat: req.body.gouvernorat,
-        nbr_chambre_double: req.body.nbr_chambre_double
+        nbr_chambre_double: req.body.nbr_chambre_double,
+        nbr_chambre_single:req.body.nbr_chambre_single,
+       nbr_chambre_triple:req.body.nbr_chambre_triple,
+       prix_nuit_single:req.body.prix_nuit_single,
+        prix_nuit_double:req.body.prix_nuit_double,
+        prix_nuit_triple:req.body.prix_nuit_triple
     });
 
-    // Save Customer in the database
     Hotel.create(hotel, (err, data) => {
         if (err)
             res.status(500).send({
@@ -26,19 +29,19 @@ exports.create = (req, res) => {
         else res.send(data);
     });
 };
-// Retrieve all Customers from the database.
+
 exports.findAll = (req, res) => {
-    Hotel.getAll((err, data) => {
+    Hotel.getAll((err, rows) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving hotels."
             });
-        else res.send(data);
+        else res.render('hotelerie/hotel', {hotels :rows});
     });
 };
 
-// Find a single Customer with a customerId
+// Find a single hotel with a customerId
 exports.findOne = (req, res) => {
     Hotel.findById(req.params.hotelId, (err, data) => {
         if (err) {
@@ -51,11 +54,77 @@ exports.findOne = (req, res) => {
                     message: "Error retrieving hotel with id " + req.params.hotelId
                 });
             }
-        } else res.send(data);
+        }   else res.render('hotelerie/oneHotel', {hotel :data});
+
     });
 };
+
+exports.findPromos = (req, res) => {
+    Hotel.findPromos(req.params.name,req.params.date,(err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found hotel with name ${req.params.name}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving hotel with name " + req.params.name
+                });
+            }
+        } else res.render('hotelerie/promosHotel', {hotel :data});
+    });
+};
+
+exports.findByNuitSingle= (req, res) => {
+    Hotel.findByNuitSingle(req.params.name, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found hotel with name ${req.params.name}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving hotel with name " + req.params.name
+                });
+            }
+        } else res.render('hotelerie/prixNuitHotel', {hotel :data});
+    });
+};
+exports.findByNuitDouble= (req, res) => {
+    Hotel.findByNuitDouble(req.params.name, (err, data) => {
+
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found hotel with name ${req.params.name}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving hotel with name " + req.params.name
+                });
+            }
+        } else res.render('hotelerie/prixNuitdouble', {hotel :data});
+    });
+};
+exports.findByNuitTriple= (req, res) => {
+    Hotel.findByNuitTriple(req.params.name, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found hotel with name ${req.params.name}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving hotel with name " + req.params.name
+                });
+            }
+        } else res.render('hotelerie/prixNuitTriple', {hotel :data});
+    });
+};
+
+
 /*
-// Update a Customer identified by the customerId in the request
+
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body) {
@@ -82,9 +151,8 @@ exports.update = (req, res) => {
         }
     );
 };*/
-// Delete a Customer with the specified customerId in the request
-exports.delete = (req, res) => {
-    Hotel.remove(req.params.hotelId, (err, data) => {
+exports.deleteId = (req, res) => {
+    Hotel.removeId(req.params.hotelId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
@@ -95,9 +163,29 @@ exports.delete = (req, res) => {
                     message: "Could not delete hotel with id " + req.params.hotelId
                 });
             }
+        } else res.render('hotelerie/deleteOne', {hotels :data});
+
+
+    });
+};
+//delete name
+
+exports.deleteName = (req, res) => {
+    Hotel.removeName(req.params.name, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found hotel with id ${req.params.name}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Could not delete hotel with id " + req.params.name
+                });
+            }
         } else res.send({ message: `hotel was deleted successfully!` });
     });
 };
+
 // Delete all Customers from the database.
 exports.deleteAll = (req, res) => {
     Hotel.removeAll((err, data) => {
