@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1>l'hotel</h1>
+    {% if hotel|length == 0 %}
+        Il n'y a aucun hotel à afficher.
+    {% else %}
+        <ul>
+                <li>name : {{ hotel.name }}</li>
+                <li>gouvernorat : {{ hotel.gouvernorat }}</li>
+                <li>nombre des chambres single : {{ hotel.nbr_chambre_single }}</li>
+                <li>nombre des chambres double : {{ hotel.nbr_chambre_double }}</li>
+                <li>nombre des chambres triple : {{ hotel.nbr_chambre_triple }}</li>
+                <li>prix de chaque chambre single : {{ hotel.prix_nuit_single }}</li>
+                <li>prix de chaque chambre double : {{ hotel.prix_nuit_double }}</li>
+                <li>prix de chaque chambre triple : {{ hotel.prix_nuit_triple }}</li>
+
+                <br>
+                <br>
+        </ul>
+    {% endif %}
+{% endblock %}

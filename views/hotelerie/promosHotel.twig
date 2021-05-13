@@ -1,0 +1,21 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1>l'hotel</h1>
+    {% if hotel|length == 0 %}
+        Il n'y a aucun hotel à afficher.
+    {% else %}
+        <ul>
+            Les prix en promos dans cette date :
+            <br>
+            {% for x in hotel %}
+            <li>prix de chaque chambre single : {{ x.prix_nuit_single }}</li>
+            <li>prix de chaque chambre double : {{ x.prix_nuit_double }}</li>
+            <li>prix de chaque chambre triple : {{ x.prix_nuit_triple }}</li>
+            <br>
+            <br>
+            {% endfor %}
+
+        </ul>
+    {% endif %}
+{% endblock %}
