@@ -31,20 +31,24 @@ exports.create = (req, res) => {
         else res.send(data);
     });
 };
+
+exports.ahla = (req, res) => {
+    res.render('Personnel/addPersonnelle');
+};
 // Retrieve all personnels from the database.
 exports.findAll = (req, res) => {
-    Personnelle.getAll((err, data) => {
+    Personnelle.getAll((err, rows) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving personnels."
             });
-        else res.send(data);
+        else res.render('personnel/personnelle', {personnelles :rows});
     });
 };
 
 // Find a single personnel with a personnelId
-exports.findOne = (req, res) => {
+exports.onePersonnel = (req, res) => {
     Personnelle.findById(req.params.personnelleId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
@@ -56,7 +60,7 @@ exports.findOne = (req, res) => {
                     message: "Error retrieving personnel with id " + req.params.personnelleId
                 });
             }
-        } else res.send(data);
+        }  else res.render('Personnel/onePersonnel', {personnels :data});
     });
 };
 
@@ -100,7 +104,7 @@ exports.delete = (req, res) => {
                     message: "Could not delete personnel with id " + req.params.personnelleId
                 });
             }
-        } else res.send({ message: `personnel was deleted successfully!` });
+        } else res.render('Personnel/personnelle', {personnels :data});
     });
 };
 // Delete all Customers from the database.

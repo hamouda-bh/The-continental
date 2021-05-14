@@ -3,15 +3,16 @@ const router = express.Router()
 
 const personnelle = require('../controller/personnelle.controller.js');
 
-router.post("/personnelle", personnelle.create);
+router.post("/add", personnelle.create);
 
-router.get("/personnelle", personnelle.findAll);
+router.get("/all", personnelle.findAll);
 
-router.get("/personnelle/:personnelleId", personnelle.findOne);
+router.get("/onePersonnel/:personnelleId", personnelle.onePersonnel);
 
 router.put("/personnelle/:personnelleId", personnelle.update);
 
-router.delete("/personnelle/:personnelleId", personnelle.delete);
-
+router.delete("/deleteOne/:personnelleId", personnelle.delete);
+router.delete("/deleteAll", personnelle.deleteAll);
+router.get("/form",personnelle.ahla);
 
 module.exports= router;
