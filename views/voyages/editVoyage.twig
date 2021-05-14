@@ -65,15 +65,15 @@
                     <a href="http://localhost:3000/voyages/all">Show all</a>
                     </div>
                     <div class="field quarter">
-                        <SELECT name="pays" id="pays" size="1">
+                        <!--                 <SELECT name="pays" id="pays" size="1">
             {% if country|length == 0 %}
             Il n'y a aucun pays à afficher.
             {% else %}
-                        {% for p in country %}
+                        {% for pays in country %}
                              <OPTION>{{ p }}
                         {% endfor %}
                   {% endif %}
-                        </SELECT>
+                        </SELECT> -->
 
 
                     </div>
@@ -81,39 +81,46 @@
                 </div>
             </form>
         </section>
- <div class="table-responsive">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
-            <thead>
-            <tr>
-                <th>Country</th>
-                <th>Price</th>
-                <th>Governorate</th>
-                <th>Start date</th>
-                <th>End date</th>
-            </tr>
-            </thead>
-            {% if trips|length == 0 %}
-            Il n'y a aucun voyage à afficher.
-            {% else %}
+        <form id="formulaire">
+                        <div class="fields">
 
-            <tbody>
-                {% for voyages in trips %}
-            <tr>
-                <td>{{ voyages.pays }}</td>
-                <td>{{ voyages.prix }}</td>
-                <td>{{ voyages.gouvernorat }}</td>
-                <td>{{ voyages.date_debut|date("m/d/Y")}}</td>
-                <td>{{ voyages.date_fin|date("m/d/Y") }}</td>
-                <td> <button class="btns" onclick="deleteOne({{voyages.id}})" >remove </button></td>
-                <td> <button class="btns" onclick="deleteOne({{voyages.id}})" >edit </button></td>
-            </tr>
-                {% endfor %}
-            </tbody>
-            {% endif %}
-        </table></div>
+                            <div class="field half">
+                                <input type="text" name="pays" id="pays" value="{{ voyages.pays }}" />
+                            </div>
+
+                            <div class="field quarter">
+                                <input type="text" name="prix" id="prix" value="{{ voyages.prix }}" />
+                            </div>
+
+                            <div class="field half">
+                                <input type="text" name="gouvernorat" id="gouvernorat" value="{{ voyages.gouvernorat }}" />
+                            </div>
+
+                            <div class="field half">
+
+                                <label>Start date :</label><input type="text" name="date_debut" id="date_debut" value="{{ voyages.date_debut|date("m/d/Y")}}" />
+                            </div>
+
+                            <div class="field quarter">
+                                <label>End date :</label>
+                                <input type="text" name="date_fin" id="date_fin" value="{{ voyages.date_fin|date("m/d/Y") }}" />
+                            </div>
+
+                            <div class="field text-right">
+                                <label>&nbsp;</label>
+
+                                <ul class="actions">
+                                    <li>
+                                        <button type="submit" class="btn btn-outline-primary">create</button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        </form>
         <div style="text-align: center;">
  <td> <button class="btns" onclick="deleteall()">remove all</button></td>
-     <td> <button class="btns"  onclick="addVoyage()"  >add trip</button></td>
+     <td> <button class="btns"  onclick="editVoyage({{ voyages.id }})"  >edit trip</button></td>
 
 </div>
 <br><br>
@@ -168,22 +175,36 @@ location.href="http://localhost:3000"
 }
 
 
-function addVoyage (){
-location.href="http://localhost:3000/voyages/form"
+function editVoyage (id){
+location.href="http://localhost:3000/voyages/updateId/"+id
 }
+
+  $('#formulaire').on("submit",function (e){
+    e.preventDefault()
+      $.ajax({
+          type: 'post',
+          url: "http://localhost:3000/voyages/updateId/"+{{ voyages.pays }},
+          data:{
+              pays: $('#pays').val(),
+              prix: $('#prix').val(),
+              gouvernorat: $('#gouvernorat').val(),
+              date_debut: $('#date_debut').val(),
+              date_fin: $('#date_fin').val()
+          },
+          dataType: 'json',
+          async: false,
+          success: (result) => {
+              location.href="http://localhost:3000/hotel/all"
+          }
+      })
+
 
  $('#formulaire2').on("submit",function (e){
      e.preventDefault()
-
-
-
     location.href="http://localhost:3000/voyages/byCountry/"+$( "#pays option:selected" ).text();
-
   })
 
-  $(document).ready(function () {
-    $('#tab').DataTable();
-});
+
 </script>
 
 
