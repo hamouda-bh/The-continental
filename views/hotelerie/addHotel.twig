@@ -1,0 +1,158 @@
+{% extends 'layout.twig' %}
+
+  {% block stylesheets %}
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
+  {% endblock %}
+
+{% block body %}
+
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <div class="inner">
+
+                <!-- Logo -->
+                <a href="fichiersHtml/index.html" class="logo">
+                    <span class="fa fa-plane"></span> <span class="title">The continental</span>
+                </a>
+
+                <!-- Nav -->
+                <nav>
+                    <ul>
+                        <li><a href="#menu">Menu</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="fichiersHtml/index.html">Home</a></li>
+
+                <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
+
+                <li><a href="fichiersHtml/blog.html">Blog</a></li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle">About</a>
+
+                    <ul>
+                        <li><a href="fichiersHtml/about.html">About Us</a></li>
+                        <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
+                        <li><a href="fichiersHtml/terms.html">Terms</a></li>
+                    </ul>
+                </li>
+                <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div id="main">
+            <div class="inner">
+                <section>
+                    <h2>Ajouter un hotel</h2>
+                    <form id="formulaire">
+                        <div class="fields">
+                            <div class="field half">
+                                <input type="text" name="name" id="name" placeholder="Name hotel" />
+                            </div>
+
+                            <div class="field half">
+                                <input type="text" name="gouvernorat" id="gouvernorat" placeholder="Gouvernorat" />
+                            </div>
+
+                            <div class="field half">
+                                <input type="text" name="nombreS" id="nombreS" placeholder="Nombre Chambre Single" />
+                            </div>
+
+                            <div class="field quarter">
+                                <input type="text" name="nombreD" id="nombreD" placeholder="Nombre Chambre Double" />
+                            </div>
+
+                            <div class="field quarter">
+                                <input type="text" name="nombreT" id="nombreT" placeholder="Nombre Chambre Triple" />
+                            </div>
+                            <div class="field half">
+                                <input type="text" name="prixS" id="prixS" placeholder="prix Chambre Single" />
+                            </div>
+
+                            <div class="field quarter">
+                                <input type="text" name="prixD" id="prixD" placeholder="prix Chambre Double" />
+                            </div>
+
+                            <div class="field quarter">
+                                <input type="text" name="prixT" id="prixT" placeholder="prix Chambre Triple" />
+                            </div>
+
+                            <div class="field text-right">
+                                <label>&nbsp;</label>
+
+                                <ul class="actions">
+                                    <li>
+                                        <button type="submit" class="btn btn-outline-primary">create</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+
+                <ul class="copyright">
+                    <li>Copyright © 2020 Company Name </li>
+                    <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+  {% block javascriptsAtTheEnd %}
+      <script src="/javascripts/jquery.min.js"></script>
+      <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="/javascripts/jquery.scrolly.min.js"></script>
+      <script src="/javascripts/jquery.scrollex.min.js"></script>
+      <script src="/javascripts/main.js"></script>
+<script>
+
+  $('#formulaire').on("submit",function (e){
+    e.preventDefault()
+      $.ajax({
+          type: 'post',
+          url: "http://localhost:3000/hotel/add",
+          data:{
+              name: $('#name').val(),
+              gouvernorat: $('#gouvernorat').val(),
+              nbr_chambre_single: $('#nombreS').val(),
+              nbr_chambre_double: $('#nombreD').val(),
+              nbr_chambre_triple: $('#nombreT').val(),
+              prix_nuit_single: $('#prixS').val(),
+              prix_nuit_double: $('#prixD').val(),
+              prix_nuit_triple: $('#prixT').val()
+          },
+          dataType: 'json',
+          async: false,
+          success: (result) => {
+              location.href="http://localhost:3000/hotel/all"
+          }
+      })
+      // location.href="http://localhost:3000/hotel/all"
+
+  })
+
+
+</script>
+  {% endblock %}
