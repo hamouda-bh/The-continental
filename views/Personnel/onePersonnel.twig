@@ -1,7 +1,7 @@
 {% extends 'layout.twig' %}
 
   {% block stylesheets %}
-     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="/stylesheets/main.css" />
       <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
       <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
@@ -54,36 +54,39 @@
     </nav>
     <div id="main">
     <div class="inner">
-    <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Affichage des hotels dans ce gouvernorat</span></h3>
+    <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Affichage du personnel ayant cet id</span></h3>
 
     <div class="container-fluid">
 
     <div class="table-responsive">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
-            <thead  id="head">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
+            <thead>
             <tr>
-                <th>Nom hotel</th>
-                <th>Gouvernorat</th>
-                <th>prix des chambres single</th>
-                <th>prix des chambres double</th>
-                <th>prix des chambres triple</th>
-                <th>Suppression</th>
-                <th>Details</th>
+                <th>Nom personnel</th>
+                <th>prenom</th>
+                <th>age</th>
+                <th>fonction</th>
+                <th>salaire</th>
+                <th>date debut contrat</th>
+                <th>date fin contrat</th>
             </tr>
             </thead>
-            {% if hotels|length == 0 %}
-            Il n'y a aucun hotel à afficher.
+            {% if personnels|length == 0 %}
+            Il n'y a aucun personnel à afficher.
             {% else %}
+
             <tbody>
-                {% for hotel in hotels %}
+                {% for personnelle in personnels %}
             <tr>
-                <td>{{ hotel.name }}</td>
-                <td>{{ hotel.gouvernorat }}</td>
-                <td>{{ hotel.prix_nuit_single }}</td>
-                <td>{{ hotel.prix_nuit_double }}</td>
-                <td>{{ hotel.prix_nuit_triple }}</td>
-              <td> <button class="btn btn-outline-danger" onclick="deleteOne({{hotel.id}})" >remove </button></td>
-              <td> <button class="btn btn-outline-primary" onclick="findOne({{ hotel.id }})">details </button></td>
+                <td>{{ personnelle.nom }}</td>
+                <td>{{ personnelle.prenom }}</td>
+                <td>{{ personnelle.age }}</td>
+                <td>{{ personnelle.fonction }}</td>
+                <td>{{ personnelle.salaire }}</td>
+                <td>{{ personnelle.date_debut_contrat }}</td>
+                <td>{{ personnelle.date_fin_contrat }}</td>
+                 <td> <button class="btn btn-outline-danger" onclick="deleteOne({{personnelle.id}})" >Supprimer </button></td>
+                 <td> <button class="btn btn-outline-primary" onclick="findOne({{ personnelle.id }})">Modifier </button></td>
             </tr>
                 {% endfor %}
             </tbody>
@@ -112,7 +115,7 @@
 function deleteOne (id){
 $.ajax({
 			type: 'delete',
-			url: "http://localhost:3000/hotel/deleteOne/"+id,
+			url: "http://localhost:3000/personnelle/deleteOne/"+id,
 			dataType: 'json',
 			async: false,
 			success: (result) => {
@@ -124,7 +127,7 @@ function findOne (id){
 location.href="http://localhost:3000/hotel/findOne/"+id
 }
 function deleteall (){
-location.href="http://localhost:3000/hotel/deleteAll"
+location.href="http://localhost:3000/personnelle/deleteAll"
 }
 $(document).ready(function () {
     $('#tab').DataTable();

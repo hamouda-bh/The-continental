@@ -5,7 +5,6 @@ const router = express.Router()
 const Hotel = require('../controller/hotel.controller.js');
 
 
-
     router.post('/add', Hotel.create);
 
     router.get('/all',Hotel.findAll);

@@ -2,15 +2,23 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+ require('./models/db.js');
+ require('./models/hotel.model.js');
+ require('./models/personnelle.model.js');
 var indexRouter = require('./routes/index');
 var hotelRouter = require('./routes/hotel');
 var voyagesRouter = require('./routes/voyages');
 var usersRouter = require('./routes/users');
+var personnelleRouter = require ('./routes/personnelle');
+
+var logger = require('morgan');
 var logger = require('morgan');
 var app = express();
 
 require('./models/db.js');
 require('./models/hotel.model.js');
+require('./models/personnelle.model.js');
 require('./models/voyages.model.js');
 
 // view engine setup
@@ -27,6 +35,7 @@ app.use('/', indexRouter);
 app.use('/hotel', hotelRouter);
 app.use('/voyages', voyagesRouter);
 app.use('/users', usersRouter);
+app.use('/personnelle',personnelleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
