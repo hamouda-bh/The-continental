@@ -77,7 +77,6 @@ exports.findGouv = (req, res) => {
                 });
             }
         }   else res.render('hotelerie/findGouv', {hotels :data});
-
     });
 };
 
@@ -151,11 +150,7 @@ exports.update = (req, res) => {
             message: "Content can not be empty!"
         });
     }
-
-    Hotel.updateById(
-
-        new Hotel(req.body),
-        (err, data) => {
+    Hotel.updateById(req.params.hotelId,  new Hotel(req.body),  (err, data) => {
             if (err) {
                 if (err.kind === "not_found") {
                     res.status(404).send({
@@ -167,7 +162,7 @@ exports.update = (req, res) => {
                     });
                 }
             } else res.send(data);
-        },req.params.hotelId
+        }
     );
 };
 exports.deleteId = (req, res) => {
