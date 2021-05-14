@@ -18,7 +18,6 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "twig": "~0.10.3"
-
   },
   "description": "Ceci est le repos partagé de l'équipe continental",
   "main": "Server.js",

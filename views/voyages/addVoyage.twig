@@ -1,0 +1,148 @@
+{% extends 'layout.twig' %}
+
+  {% block stylesheets %}
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  {% endblock %}
+
+{% block body %}
+
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <div class="inner">
+
+                <!-- Logo -->
+                <a href="fichiersHtml/index.html" class="logo">
+                    <span class="fa fa-plane"></span> <span class="title">The continental</span>
+                </a>
+                <!-- Nav -->
+                <nav>
+                    <ul>
+                        <li><a href="#menu">Menu</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="fichiersHtml/index.html">Home</a></li>
+
+                <li><a href="http://localhost:3000/voyages/all" class="active">Trips management</a></li>
+
+                <li><a href="http://localhost:3000/hotel/all">Hotel management</a></li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle">About</a>
+
+                    <ul>
+                        <li><a href="fichiersHtml/about.html">About Us</a></li>
+                        <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
+                        <li><a href="fichiersHtml/terms.html">Terms</a></li>
+                    </ul>
+                </li>
+                <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div id="main">
+            <div class="inner">
+                <section>
+                    <h2>Add new Trip</h2>
+                    <form id="formulaire">
+                        <div class="fields">
+                            <div class="field half">
+                                <input type="text" name="pays" id="pays" placeholder="Country" />
+                            </div>
+
+                            <div class="field quarter">
+                                <input type="text" name="prix" id="prix" placeholder="Price" />
+                            </div>
+
+                            <div class="field half">
+                                <input type="text" name="gouvernorat" id="gouvernorat" placeholder="Governorate" />
+                            </div>
+
+                            <div class="field half">
+                                <label>Start date :</label>
+                                <input type="date" name="date_debut" id="date_debut" placeholder="Start date" />
+                            </div>
+
+                            <div class="field quarter">
+                                <label>End date :</label>
+                                <input type="date" name="date_fin" id="date_fin" placeholder="End date" />
+                            </div>
+
+                            <div class="field text-right">
+                                <label>&nbsp;</label>
+
+                                <ul class="actions">
+                                    <li>
+                                        <button type="submit" class="btn btn-outline-primary">create</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <ul class="copyright">
+                    <li>Copyright © 2021 The Continental </li>
+                    <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+  {% block javascriptsAtTheEnd %}
+      <script src="/javascripts/jquery.min.js"></script>
+      <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="/javascripts/jquery.scrolly.min.js"></script>
+      <script src="/javascripts/jquery.scrollex.min.js"></script>
+      <script src="/javascripts/main.js"></script>
+      <script>
+
+          $('#formulaire').on("submit",function (e){
+              if ($('#date_debut').val() < $('#date_fin').val())
+              {
+                  e.preventDefault()
+                  $.ajax({
+                      type: 'post',
+                      url: "http://localhost:3000/voyages/add",
+                      data: {
+                          pays: $('#pays').val(),
+                          prix: $('#prix').val(),
+                          gouvernorat: $('#gouvernorat').val(),
+                          date_debut: $('#date_debut').val(),
+                          date_fin: $('#date_fin').val()
+                      },
+                      dataType: 'json',
+                      async: false,
+                      success: (result) => {
+                          location.href = "http://localhost:3000/voyages/all"
+                      }
+                  })
+              }
+              else alert("start date must be before End date'");
+
+          })
+
+
+      </script>
+  {% endblock %}
