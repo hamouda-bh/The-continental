@@ -43,6 +43,25 @@ Voyages.findById = (voyageId, result) => {
     });
 };
 
+Voyages.findByC = (pays, result) => {
+    sql.query(`SELECT * FROM voyages WHERE pays = ?`,pays, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("found voyages: ", res);
+            result(null, res);
+            return;
+        }
+
+        // not found Customer with the id
+        result({ kind: "not_found" }, null);
+    });
+};
+
 Voyages.getAll = result => {
     sql.query("SELECT * FROM voyages", (err, res) => {
         if (err) {
@@ -150,8 +169,18 @@ Voyages.removeAll = result => {
 };
 
 
+Voyages.getCountry = result => {
+    sql.query("SELECT pays FROM voyages", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
 
-
+        console.log("voyages: ", res);
+        result(null, res);
+    });
+};
 
 
 
