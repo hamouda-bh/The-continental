@@ -17,4 +17,11 @@ router.put("/updateDD/:voyagesId", Voyages.updateD);
 
 router.put("/updateDF/:voyagesId", Voyages.updateF);
 
+//**
+router.get("/form",Voyages.affiche);
+
+router.get("/byCountry/:pays", Voyages.findByCountry,Voyages.findCountry);
+
+router.get('/pays',Voyages.findCountry);
+
 module.exports= router;

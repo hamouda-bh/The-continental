@@ -2426,6 +2426,22 @@ input, select, textarea {
 
 /* Button */
 
+
+
+.btns{
+
+	font-size: 0.5em;
+	font-weight: 400;
+
+}
+.btns:hover{
+	background-color: #f2849e;
+	color:#454545;
+}
+
+
+
+
 	input[type="submit"],
 	input[type="reset"],
 	input[type="button"],
