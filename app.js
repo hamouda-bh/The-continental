@@ -8,6 +8,7 @@ var logger = require('morgan');
  require('./models/personnelle.model.js');
 var indexRouter = require('./routes/index');
 var hotelRouter = require('./routes/hotel');
+var voyagesRouter = require('./routes/voyages');
 var usersRouter = require('./routes/users');
 var personnelleRouter = require ('./routes/personnelle');
 
@@ -18,6 +19,7 @@ var app = express();
 require('./models/db.js');
 require('./models/hotel.model.js');
 require('./models/personnelle.model.js');
+require('./models/voyages.model.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/hotel', hotelRouter);
+app.use('/voyages', voyagesRouter);
 app.use('/users', usersRouter);
 app.use('/personnelle',personnelleRouter);
 

@@ -1,7 +1,7 @@
 {% extends 'layout.twig' %}
 
   {% block stylesheets %}
-      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="/stylesheets/main.css" />
       <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
       <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
@@ -59,8 +59,8 @@
     <div class="container-fluid">
 
     <div class="table-responsive">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
-            <thead>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
+            <thead  id="head">
             <tr>
                 <th>Nom hotel</th>
                 <th>Gouvernorat</th>
@@ -74,7 +74,6 @@
             {% if hotels|length == 0 %}
             Il n'y a aucun hotel à afficher.
             {% else %}
-
             <tbody>
                 {% for hotel in hotels %}
             <tr>
@@ -84,7 +83,7 @@
                 <td>{{ hotel.prix_nuit_double }}</td>
                 <td>{{ hotel.prix_nuit_triple }}</td>
               <td> <button class="btn btn-outline-danger" onclick="deleteOne({{hotel.id}})" >remove </button></td>
-                <td> <button class="btn btn-outline-primary" onclick="findOne({{ hotel.id }})">details </button></td>
+              <td> <button class="btn btn-outline-primary" onclick="findOne({{ hotel.id }})">details </button></td>
             </tr>
                 {% endfor %}
             </tbody>
