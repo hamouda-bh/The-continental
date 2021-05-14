@@ -10,7 +10,6 @@
 {% block body %}
 
     <div id="wrapper">
-
     <!-- Header -->
     <header id="header">
         <div class="inner">
@@ -52,6 +51,7 @@
             <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
         </ul>
     </nav>
+    <br> <br>
     <div id="main">
     <div class="inner">
     <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Affichage de tout les hotels</span></h3>
@@ -66,6 +66,9 @@
                              <OPTION>monastir
                              <OPTION>hammamet
                              <OPTION>sousse
+                             <OPTION>nebel
+                              <OPTION>tabarka
+                              <OPTION>kelibia
                         </SELECT>
                     </div>
                     <div class="field half">
@@ -76,7 +79,7 @@
         </section>
     <div class="table-responsive">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
-            <thead>
+            <thead id="head">
             <tr>
                 <th>Nom hotel</th>
                 <th>Gouvernorat</th>
@@ -125,6 +128,7 @@
                         <input id="nom" type="text" placeholder="Name" />
                     </div>
                     <div class="field half">
+                   <br>
                     <button class="btn btn-outline-info" type="submit" >chercher les prix</button>
                     </div>
                 </div>
@@ -147,6 +151,7 @@
 
 
  {% endblock %}
+
   {% block javascriptsAtTheEnd %}
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>

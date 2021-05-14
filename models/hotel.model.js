@@ -178,8 +178,8 @@ Hotel.getAll = result => {
 
 Hotel.updateById = (id, hotel, result) => {
     sql.query(
-        "UPDATE hotel SET name = ?, gouvernorat = ? ,nbr_chambre_double = ?,nbr_chambre_single = ?,nbr_chambre_triple = ?, prix_nuit_single = ?, prix_nuit_double = ?, prix_nuit_triple = ?   WHERE id = ?",
-        [ hotel.name, hotel.gouvernorat,hotel.nbr_chambre_double, hotel.nbr_chambre_single, hotel.nbr_chambre_triple, hotel.prix_nuit_single, hotel.prix_nuit_double, hotel.prix_nuit_triple, id],
+        "UPDATE hotel SET nbr_chambre_double = ?,nbr_chambre_single = ?,nbr_chambre_triple = ?, prix_nuit_single = ?, prix_nuit_double = ?, prix_nuit_triple = ?   WHERE id = ?",
+        [hotel.nbr_chambre_double, hotel.nbr_chambre_single, hotel.nbr_chambre_triple, hotel.prix_nuit_single, hotel.prix_nuit_double, hotel.prix_nuit_triple, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
