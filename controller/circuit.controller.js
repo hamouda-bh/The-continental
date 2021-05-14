@@ -27,7 +27,7 @@ exports.create = (req, res) => {
                 message:
                     err.message || "Some error occurred while creating the circuit."
             });
-        else res.render(data);
+        else res.send(data);
     });
 };
 // Retrieve all Customers from the database.
@@ -38,7 +38,7 @@ exports.findAll = (req, res) => {
                 message:
                     err.message || "Some error occurred while retrieving circuits."
             });
-        else res.render(data);
+        else res.render('circuit/circuit', {circuits :rows});
     });
 };
 
@@ -55,7 +55,7 @@ exports.findOne = (req, res) => {
                     message: "Error retrieving Customer with id " + req.params.circuitId
                 });
             }
-        } else res.render(data);
+        }   else res.render('circuit/oneCircuit', {circuit :data});
     });
 };
 /*
@@ -99,7 +99,7 @@ exports.delete = (req, res) => {
                     message: "Could not delete hotel with id " + req.params.circuitId
                 });
             }
-        } else res.render({ message: `hotel was deleted successfully!` });
+        } else res.render('circuit/deleteOne', {circuits :data});
     });
 };
 // Delete all Customers from the database.
