@@ -7,19 +7,12 @@
   {% endblock %}
 
 {% block body %}
-
     <div id="wrapper">
-
-        <!-- Header -->
         <header id="header">
             <div class="inner">
-
-                <!-- Logo -->
-                <a href="fichiersHtml/index.html" class="logo">
+                 <a href="fichiersHtml/index.html" class="logo">
                     <span class="fa fa-plane"></span> <span class="title">The continental</span>
                 </a>
-
-                <!-- Nav -->
                 <nav>
                     <ul>
                         <li><a href="#menu">Menu</a></li>
@@ -29,19 +22,14 @@
             </div>
         </header>
 
-        <!-- Menu -->
         <nav id="menu">
             <h2>Menu</h2>
             <ul>
                 <li><a href="fichiersHtml/index.html">Home</a></li>
-
                 <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
-
                 <li><a href="fichiersHtml/blog.html">Blog</a></li>
-
                 <li>
                     <a href="#" class="dropdown-toggle">About</a>
-
                     <ul>
                         <li><a href="fichiersHtml/about.html">About Us</a></li>
                         <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
@@ -51,6 +39,7 @@
                 <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
             </ul>
         </nav>
+        <br><br>
         <div id="main">
             <div class="inner">
                 <section>
@@ -58,50 +47,40 @@
                     <form id="formulaire">
                         <div class="fields">
                             <div class="field half">
-                                <input type="text" name="name" id="name" placeholder="Name hotel" />
+                                <input type="text" name="name" id="name" placeholder="Nom hotel" />
                             </div>
-
                             <div class="field half">
                                 <input type="text" name="gouvernorat" id="gouvernorat" placeholder="Gouvernorat" />
                             </div>
-
                             <div class="field half">
                                 <input type="text" name="nombreS" id="nombreS" placeholder="Nombre Chambre Single" />
                             </div>
-
                             <div class="field quarter">
                                 <input type="text" name="nombreD" id="nombreD" placeholder="Nombre Chambre Double" />
                             </div>
-
                             <div class="field quarter">
                                 <input type="text" name="nombreT" id="nombreT" placeholder="Nombre Chambre Triple" />
                             </div>
                             <div class="field half">
                                 <input type="text" name="prixS" id="prixS" placeholder="prix Chambre Single" />
                             </div>
-
                             <div class="field quarter">
                                 <input type="text" name="prixD" id="prixD" placeholder="prix Chambre Double" />
                             </div>
-
                             <div class="field quarter">
                                 <input type="text" name="prixT" id="prixT" placeholder="prix Chambre Triple" />
                             </div>
-
                             <div class="field text-right">
                                 <label>&nbsp;</label>
-
                                 <ul class="actions">
                                     <li>
-                                        <button type="submit" class="btn btn-outline-primary">create</button>
+                                        <button type="submit" id="btH" class="btn btn-outline-primary">ajouter</button>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </form>
                 </section>
-
-
                 <ul class="copyright">
                     <li>Copyright © 2020 Company Name </li>
                     <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
@@ -109,17 +88,8 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
 {% endblock %}
+
   {% block javascriptsAtTheEnd %}
       <script src="/javascripts/jquery.min.js"></script>
       <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -149,10 +119,6 @@
               location.href="http://localhost:3000/hotel/all"
           }
       })
-      // location.href="http://localhost:3000/hotel/all"
-
   })
-
-
 </script>
   {% endblock %}

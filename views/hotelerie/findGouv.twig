@@ -10,39 +10,27 @@
 {% block body %}
 
     <div id="wrapper">
-
-    <!-- Header -->
     <header id="header">
         <div class="inner">
-
-            <!-- Logo -->
             <a href="fichiersHtml/index.html" class="logo">
                 <span class="fa fa-plane"></span> <span class="title">The continental</span>
             </a>
-
-            <!-- Nav -->
             <nav>
                 <ul>
                     <li><a href="#menu">Menu</a></li>
                 </ul>
             </nav>
-
         </div>
     </header>
 
-    <!-- Menu -->
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
             <li><a href="fichiersHtml/index.html">Home</a></li>
-
             <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
-
             <li><a href="fichiersHtml/blog.html">Blog</a></li>
-
             <li>
                 <a href="#" class="dropdown-toggle">About</a>
-
                 <ul>
                     <li><a href="fichiersHtml/about.html">About Us</a></li>
                     <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
@@ -52,12 +40,11 @@
             <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
         </ul>
     </nav>
+<br><br>
     <div id="main">
     <div class="inner">
     <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Affichage des hotels dans ce gouvernorat</span></h3>
-
     <div class="container-fluid">
-
     <div class="table-responsive">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
             <thead  id="head">
@@ -82,22 +69,21 @@
                 <td>{{ hotel.prix_nuit_single }}</td>
                 <td>{{ hotel.prix_nuit_double }}</td>
                 <td>{{ hotel.prix_nuit_triple }}</td>
-              <td> <button class="btn btn-outline-danger" onclick="deleteOne({{hotel.id}})" >remove </button></td>
-              <td> <button class="btn btn-outline-primary" onclick="findOne({{ hotel.id }})">details </button></td>
+              <td> <button class="btn btn-outline-danger" id="btH" onclick="deleteOne({{hotel.id}})" >supprimer </button></td>
+              <td> <button class="btn btn-outline-primary" id="btH" onclick="findOne({{ hotel.id }})">details </button></td>
             </tr>
                 {% endfor %}
             </tbody>
             {% endif %}
         </table>
         <div style="text-align: center;">
-     <td> <button class="btn btn-outline-danger" onclick="deleteall()">remove all</button></td>
-
+     <td> <button class="btn btn-outline-danger" id="btH" onclick="deleteall()">supprimer le tout</button></td>
 </div>
 </div>
     <br>
-
-
  {% endblock %}
+
+
   {% block javascriptsAtTheEnd %}
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -108,7 +94,6 @@
     <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>
 
 <script>
-
 function deleteOne (id){
 $.ajax({
 			type: 'delete',
@@ -120,12 +105,15 @@ $.ajax({
 })
 location.reload()
 }
+
 function findOne (id){
 location.href="http://localhost:3000/hotel/findOne/"+id
 }
+
 function deleteall (){
 location.href="http://localhost:3000/hotel/deleteAll"
 }
+
 $(document).ready(function () {
     $('#tab').DataTable();
 });
