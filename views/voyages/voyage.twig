@@ -102,7 +102,7 @@
                 <td>{{ voyages.date_debut|date("m/d/Y")}}</td>
                 <td>{{ voyages.date_fin|date("m/d/Y") }}</td>
                 <td> <button class="btns" onclick="deleteOne({{voyages.id}})" >remove </button></td>
-                <td> <button class="btns" onclick="deleteOne({{voyages.id}})" >edit </button></td>
+                <td> <button class="btns" onclick="findOne({{ voyages.id }})" >edit </button></td>
             </tr>
                 {% endfor %}
             </tbody>
@@ -165,6 +165,9 @@ $.ajax({
 location.href="http://localhost:3000"
 }
 
+function findOne (id){
+location.href="http://localhost:3000/voyages/findOne/"+id
+}
 
 function addVoyage (){
 location.href="http://localhost:3000/voyages/form"
@@ -172,6 +175,7 @@ location.href="http://localhost:3000/voyages/form"
 
  $('#formulaire2').on("submit",function (e){
      e.preventDefault()
+
 
 
 

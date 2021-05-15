@@ -182,6 +182,26 @@ Voyages.getCountry = result => {
     });
 };
 
+Voyages.updateById = (id, voyages, result) => {
+    sql.query(
+        "UPDATE voyages SET pays = ?, prix = ? ,gouvernorat = ?,date_debut = ?,date_fin = ? WHERE id = ?",
+        [ voyages.pays,voyages.prix,voyages.gouvernorat,voyages.date_debut,voyages.date_fin, id],
+        (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+
+            if (res.affectedRows == 0) {
+                result({ kind: "not_found" }, null);
+                return;
+            }
+            console.log("updated hotel: ", { id: id, ...voyages });
+            result(null, { id: id, ...voyages });
+        }
+    );
+};
 
 
 
