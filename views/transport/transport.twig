@@ -1,192 +1,212 @@
-{#{% extends 'layout.twig' %}#}
+{% extends 'layout.twig' %}
 
-{#  {% block stylesheets %}#}
-{#      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />#}
-{#      <link rel="stylesheet" href="/stylesheets/main.css" />#}
-{#      <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">#}
-{#      <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>#}
-{#      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">#}
-{#  {% endblock %}#}
+  {% block stylesheets %}
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
+      <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
+  {% endblock %}
 
-{#{% block body %}#}
+{% block body %}
 
-{#    <div id="wrapper">#}
+    <div id="wrapper">
 
-{#    <!-- Header -->#}
-{#    <header id="header">#}
-{#        <div class="inner">#}
+    <header id="header">
+        <div class="inner">
 
-{#            <!-- Logo -->#}
-{#            <a href="fichiersHtml/index.html" class="logo">#}
-{#                <span class="fa fa-plane"></span> <span class="title">The continental</span>#}
-{#            </a>#}
+            <a href="fichiersHtml/index.html" class="logo">
+                <span class="fa fa-plane"></span> <span class="title">The continental</span>
+            </a>
 
-{#            <!-- Nav -->#}
-{#            <nav>#}
-{#                <ul>#}
-{#                    <li><a href="#menu">Menu</a></li>#}
-{#                </ul>#}
-{#            </nav>#}
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
 
-{#        </div>#}
-{#    </header>#}
+        </div>
+    </header>
 
-{#    <!-- Menu -->#}
-{#    <nav id="menu">#}
-{#        <h2>Menu</h2>#}
-{#        <ul>#}
-{#            <li><a href="fichiersHtml/index.html">Home</a></li>#}
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="fichiersHtml/index.html">Home</a></li>
 
-{#                <li><a href="http://localhost:3000/voyages/all" class="active">Trips management</a></li>#}
+            <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
 
-{#                <li><a href="http://localhost:3000/hotel/all">Hotel management</a></li>#}
+            <li><a href="fichiersHtml/blog.html">Blog</a></li>
 
-{#                <li><a href="http://localhost:3000/transport/all">Transport management</a></li>#}
+            <li>
+                <a href="#" class="dropdown-toggle">About</a>
 
+                <ul>
+                    <li><a href="fichiersHtml/about.html">About Us</a></li>
+                    <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
+                    <li><a href="fichiersHtml/terms.html">Terms</a></li>
+                </ul>
+            </li>
+            <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+    <br> <br>
+    <div id="main">
+    <div class="inner">
+    <h3>Bus booking and management <span class="pull-right" style="color: #148599">Displaying all the buses</span></h3>
 
-{#            <li>#}
-{#                <a href="#" class="dropdown-toggle">About</a>#}
-
-{#                <ul>#}
-{#                    <li><a href="fichiersHtml/about.html">About Us</a></li>#}
-{#                    <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>#}
-{#                    <li><a href="fichiersHtml/terms.html">Terms</a></li>#}
-{#                </ul>#}
-{#            </li>#}
-{#            <li><a href="fichiersHtml/contact.html">Contact Us</a></li>#}
-{#        </ul>#}
-{#    </nav>#}
-{#    <div id="main">#}
-{#    <div class="inner">#}
-{#    <h3>Transport management <span class="pull-right" style="color: #f2849e">DISPLAY OF ALL BUSES</span></h3>#}
-
-{#    <div class="container-fluid">#}
+    <div class="container-fluid">
 {# <section>#}
 {#            <form id ="formulaire2" >#}
 {#				<div class="fields">#}
 {#                    <div class="field quarter">#}
-{#                        <SELECT name="pays" id="pays" size="1">#}
-{#                        {% set newArray = [] %}#}
-{#                        {% for voyages in trips %}#}
-{#                        {% if voyages.pays not in newArray %}#}
-{#                             <OPTION>{{ voyages.pays }}#}
-{#                       {% set newArray = newArray|merge([voyages.pays]) %}#}
-{#                        {% endif %}#}
-{#                        {% endfor %}#}
+{#                        <SELECT name="gouvernorat" id="gouvernorat" size="1">#}
+{#                             <OPTION>tunis#}
+{#                             <OPTION>monastir#}
+{#                             <OPTION>hammamet#}
+{#                             <OPTION>sousse#}
+{#                             <OPTION>nebel#}
+{#                             <OPTION>tabarka#}
+{#                             <OPTION>kelibia#}
 {#                        </SELECT>#}
 {#                    </div>#}
 {#                    <div class="field half">#}
-{#                    <button class="fa fa-search" type="submit" ></button>#}
-{#                     </div>#}
+{#                    <button class="btn btn-outline-info" type="submit" >chercher</button>#}
+{#                    </div>#}
 {#                </div>#}
 {#            </form>#}
 {#        </section>#}
-{#    <div class="table-responsive">#}
-{#        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">#}
-{#            <thead>#}
-{#            <tr>#}
-{#                <th>Country</th>#}
-{#                <th>Price</th>#}
-{#                <th>Governorate</th>#}
-{#                <th>Start date</th>#}
-{#                <th>End date</th>#}
-{#            </tr>#}
-{#            </thead>#}
-{#            {% if trips|length == 0 %}#}
-{#            Il n'y a aucun voyage à afficher.#}
-{#            {% else %}#}
+    <div class="table-responsive">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
+            <thead id="head">
+            <tr>
+                <th>Bus Name</th>
+                <th>Capacity</th>
+                <th>Driver name</th>
+                <th>$$ per days</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            {% if bus|length == 0 %}
+            Il n'y a aucun bus à afficher.
+            {% else %}
 
-{#            <tbody>#}
-{#                {% for voyages in trips %}#}
-{#            <tr>#}
-{#                <td>{{ voyages.pays }}</td>#}
-{#                <td>{{ voyages.prix }}</td>#}
-{#                <td>{{ voyages.gouvernorat }}</td>#}
-{#                <td>{{ voyages.date_debut|date("m/d/Y")}}</td>#}
-{#                <td>{{ voyages.date_fin|date("m/d/Y") }}</td>#}
-{#                <td> <button class="btns" onclick="deleteOne({{voyages.id}})" >remove </button></td>#}
-{#                <td> <button class="btns" onclick="deleteOne({{voyages.id}})" >edit </button></td>#}
-{#            </tr>#}
-{#                {% endfor %}#}
-{#            </tbody>#}
-{#            {% endif %}#}
-{#        </table></div>#}
-{#        <div style="text-align: center;">#}
-{# <td> <button class="btns" onclick="deleteall()">remove all</button></td>#}
-{#     <td> <button class="btns"  onclick="addVoyage()"  >add trip</button></td>#}
+            <tbody>
+                {% for bus in buses %}
+            <tr>
+                <td>{{ bus.name }}</td>
+                <td>{{ bus.capacite }}</td>
+                <td>{{ bus.prix_location_jour }}</td>
+                <td> <button class="btn btn-outline-danger" onclick="deleteBusUsingId({{bus.id}})" >remove </button></td>
+                <td> <button class="btn btn-outline-primary" onclick="findBusById({{ bus.id }})">details </button></td>
+            </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table></div>
+        <div style="text-align: center;">
+     <td> <button class="btn btn-outline-danger" onclick="deleteAllBuses()">remove all</button></td>
+     <td> <button class="btn btn-outline-success"  onclick="addBus()"  >add bus</button></td>
 
-{#</div>#}
-{#<br><br>#}
+</div>
+<br><br>
+{#        <h3><span class="pull-right"style="color: #148599">chercher prix par date</span></h3>#}
+<br>
 
+        <div style="text-align: center;">
+{#        <section>#}
+{#            <form id ="formulaire1">#}
+{#				<div class="fields">#}
+{#                    <div class="field quarter">#}
+{#                    <label>date d'arrivé :</label>#}
+{#                        <input id="date" type="date" placeholder="From 08.07.2020" />#}
+{#                        <input id="nom" type="text" placeholder="Name" />#}
+{#                    </div>#}
+{#                    <div class="field half">#}
+{#                   <br>#}
+{#                    <button class="btn btn-outline-info" type="submit" >chercher les prix</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </form>#}
+{#        </section>#}
+<br>
+<br>
+<br>
 
-
-{#<br>#}
-{#<br>#}
-{#<br>#}
-
-{#</div></div></div>#}
-
-
-
-{# {% endblock %}#}
-{#  {% block javascriptsAtTheEnd %}#}
-{#    <script src="/javascripts/jquery.min.js"></script>#}
-{#    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>#}
-{#    <script src="/javascripts/jquery.scrolly.min.js"></script>#}
-{#    <script src="/javascripts/jquery.scrollex.min.js"></script>#}
-{#    <script src="/javascripts/main.js"></script>#}
-{#    <script type="text/javascript" src='/javascripts/jquery.js'></script>#}
-{#    <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>#}
-
-
-{#<script>#}
-
-{#function deleteOne (id){#}
-{#$.ajax({#}
-{#			type: 'delete',#}
-{#			url: "http://localhost:3000/voyages/deleteOne/"+id,#}
-{#			dataType: 'json',#}
-{#			async: false,#}
-{#			success: (result) => {#}
-{#			}#}
-{#})#}
-{#location.reload()#}
-{#}#}
-
-
-{#function deleteall(){#}
-
-{#$.ajax({#}
-{#			type: 'delete',#}
-{#			url: "http://localhost:3000/voyages/deleteAll",#}
-{#			dataType: 'json',#}
-{#			async: false,#}
-{#			success: (result) => {#}
-{#			}#}
-{#    })#}
-
-{#location.href="http://localhost:3000"#}
-{#}#}
-
-
-{#function addVoyage (){#}
-{#location.href="http://localhost:3000/voyages/form"#}
-{#}#}
-
-{# $('#formulaire2').on("submit",function (e){#}
-{#     e.preventDefault()#}
+</div></div></div>
 
 
 
-{#    location.href="http://localhost:3000/voyages/byCountry/"+$( "#pays option:selected" ).text();#}
-
-{#  })#}
 
 
-{#  $(document).ready(function () {#}
-{#    $('#tab').DataTable();#}
-{#});#}
-{#</script>#}
 
 
-{#{% endblock %}#}
+
+
+
+
+ {% endblock %}
+
+  {% block javascriptsAtTheEnd %}
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/jquery.scrolly.min.js"></script>
+    <script src="/javascripts/jquery.scrollex.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+    <script type="text/javascript" src='/javascripts/jquery.js'></script>
+    <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>
+
+
+<script>
+
+function deleteBusUsingId (id){
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/transport/deleteBusUsingId/"+id,
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+})
+location.reload()
+}
+function findBusById (id){
+location.href="http://localhost:3000/transport/findBusById"+id
+}
+function deleteAllBuses(){
+
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/transport/deleteAllBuses/",
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+    })
+
+location.href="http://localhost:3000"
+}
+
+function addBus (){
+location.href="http://localhost:3000/transport/addBus"
+}
+
+
+//  $('#formulaire1').on("submit",function (e){
+//     e.preventDefault()
+//     location.href="http://localhost:3000/hotel/promo/"+$('#nom').val()+"/"+$('#date').val()
+//   })
+//
+//  $('#formulaire2').on("submit",function (e){
+//      e.preventDefault()
+//
+//
+//
+//     location.href="http://localhost:3000/hotel/findGouv/"+$( "#gouvernorat option:selected" ).text();
+//
+//   })
+//   $(document).ready(function () {
+//     $('#tab').DataTable();
+// });
+</script>
+
+
+{% endblock %}

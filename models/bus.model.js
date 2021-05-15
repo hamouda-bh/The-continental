@@ -44,25 +44,28 @@ Bus.findAllBuses = result => {
 };
 
 Bus.findBusById = (busId, result) => {
-    sql.query(`SELECT * FROM bus WHERE id=?`,busId,(err,res) =>{
-        if(err) {
-            console.log("error: ",err);
+    sql.query(`SELECT * FROM bus WHERE id = ${busId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
             result(err, null);
             return;
         }
-        if(res.length){
-            console.log("found bus: ",res);
-            result(null,res);
+
+        if (res.length) {
+            console.log("found bus: ", res[0]);
+            result(null, res[0]);
             return;
         }
-        result({ kind: "not_found" },null);
+
+        // not found Customer with the id
+        result({ kind: "not_found" }, null);
     });
 };
 
-Bus.updateBusById = (id, bus, result) => {
+Bus.updateBusById = (busId, bus, result) => {
     sql.query(
-        "UPDATE bus SET nom = ?,id_chauffeur = ?,capacite = ?, minibus = ?, prix_location_jour = ?,  WHERE id = ?",
-        [bus.nom, bus.id_chauffer, bus.capacite, bus.minibus, bus.prix_location_jour, id],
+        "UPDATE bus SET nom = ?,id_chauffer = ?,capacite = ?, minibus = ?, prix_location_jour = ?  WHERE id = ?",
+        [bus.nom, bus.id_chauffer, bus.capacite, bus.minibus, bus.prix_location_jour, busId],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -74,14 +77,14 @@ Bus.updateBusById = (id, bus, result) => {
                 result({ kind: "not_found" }, null);
                 return;
             }
-            console.log("updated bus: ", { id: id, ...bus });
-            result(null, { id: id, ...bus });
+            console.log("updated bus: ", { id: busId, ...bus });
+            result(null, { id: busId, ...bus });
         }
     );
 };
 
 Bus.deleteBusUsingId = (busId, result) => {
-    sql.query(`DELETE FROM bus WHERE id=?`,busId,(req,res)=>{
+    sql.query("DELETE FROM bus WHERE id = ?", busId, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -93,20 +96,21 @@ Bus.deleteBusUsingId = (busId, result) => {
             result({ kind: "not_found" }, null);
             return;
         }
+
         console.log("deleted bus with id: ", busId);
         result(null, res);
     });
 };
 
 Bus.deleteAllBuses = result => {
-    sql.query(`DELETE * FROM bus`, (err,res)=>{
+    sql.query("DELETE FROM bus", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
             return;
         }
 
-        console.log(`deleted ${res.affectedRows} bus`);
+        console.log(`deleted ${res.affectedRows} buses`);
         result(null, res);
     });
 };

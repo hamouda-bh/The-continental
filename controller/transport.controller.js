@@ -32,13 +32,13 @@ exports.createBus = (req, res) => {
 
 // Retrieve all Buses from the database.
 exports.findAllBuses = (req, res) => {
-    Bus.findAllBuses((err, data) => {
+    Bus.findAllBuses((err, rows) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving Buses."
             });
-        else res.send(data);
+        else res.render('transport/transport',{buses : rows});
     });
 };
 
@@ -55,7 +55,7 @@ exports.findBusById = (req, res) => {
                     message: "Error retrieving bus with id " + req.params.busId
                 });
             }
-        }
+        } else res.send(data);
     });
 };
 
@@ -84,13 +84,18 @@ exports.updateBusById = (req, res) => {
 
 // Remove a Bus from the database where the id = busId
 exports.deleteBusUsingId = (req, res) => {
-    Bus.deleteBusUsingId((err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Buses."
-            });
-        else res.send(data);
+    Bus.deleteBusUsingId(req.params.busId, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found bus with id ${req.params.busId}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Could not delete bus with id " + req.params.busId
+                });
+            }
+        } else res.send({ message: `bus was deleted successfully!` });
     });
 };
 
@@ -100,9 +105,9 @@ exports.deleteAllBuses = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving Buses."
+                    err.message || "Some error occurred while removing all buses."
             });
-        else res.send(data);
+        else res.send({ message: `All buses were deleted successfully!` });
     });
 };
 
