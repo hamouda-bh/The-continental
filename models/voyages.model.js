@@ -2,7 +2,6 @@ const sql = require("./db.js");
 
 // constructor
 const Voyages = function(voyages) {
-    this.id_reservation = voyages.id_reservation;
     this.pays = voyages.pays ;
     this.prix = voyages.prix ;
     this.gouvernorat = voyages.gouvernorat;
@@ -197,7 +196,7 @@ Voyages.updateById = (id, voyages, result) => {
                 result({ kind: "not_found" }, null);
                 return;
             }
-            console.log("updated hotel: ", { id: id, ...voyages });
+            console.log("updated voyage: ", { id: id, ...voyages });
             result(null, { id: id, ...voyages });
         }
     );

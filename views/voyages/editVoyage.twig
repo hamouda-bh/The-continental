@@ -17,7 +17,7 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="fichiersHtml/index.html" class="logo">
+            <a href="http://localhost:3000" class="logo">
                 <span class="fa fa-plane"></span> <span class="title">The continental</span>
             </a>
 
@@ -35,27 +35,23 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="fichiersHtml/index.html">Home</a></li>
+                     <li><a href="http://localhost:3000/">Home</a></li>
 
-            <li><a href="http://localhost:3000/voyages/all" class="active">Trips management</a></li>
+                <li><a href="http://localhost:3000/voyages/all" class="active">Trips management</a></li>
 
-            <li><a href="http://localhost:3000/hotel/all">Hotel management</a></li>
+                <li><a href="http://localhost:3000/hotel/all">Hotel management</a></li>
 
-            <li>
-                <a href="#" class="dropdown-toggle">About</a>
 
-                <ul>
-                    <li><a href="fichiersHtml/about.html">About Us</a></li>
-                    <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
-                    <li><a href="fichiersHtml/terms.html">Terms</a></li>
-                </ul>
-            </li>
-            <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
+                    <li><a href="http://localhost:3000/personnelle/all">Staff management</a></li>
+                    <li><a href="fichiersHtml/testimonials.html">Transport management</a></li>
+                    <li><a href="fichiersHtml/terms.html">Reservations management</a></li>
+
+            <li><a href="fichiersHtml/contact.html">Circuit management</a></li>
         </ul>
     </nav>
     <div id="main">
     <div class="inner">
-    <h3>Trips management <span class="pull-right" style="color: #f2849e">DISPLAY OF TRIPS </span></h3>
+    <h3>Trip Edit <span class="pull-right" style="color: #148599">DISPLAY OF TRIPS </span></h3>
 
     <div class="container-fluid">
  <section>
@@ -98,29 +94,18 @@
 
                             <div class="field half">
 
-                                <label>Start date :</label><input type="text" name="date_debut" id="date_debut" value="{{ voyages.date_debut|date("m/d/Y")}}" />
+                                <label>Start date :</label>
+                                <input type="date" name="date_debut" id="date_debut" value="{{ voyages.date_debut|date("Y-m-d")}}" />
                             </div>
 
                             <div class="field quarter">
                                 <label>End date :</label>
-                                <input type="text" name="date_fin" id="date_fin" value="{{ voyages.date_fin|date("m/d/Y") }}" />
+                                <input type="date" name="date_fin" id="date_fin" value="{{ voyages.date_fin|date("Y-m-d") }}" />
                             </div>
-
-                            <div class="field text-right">
-                                <label>&nbsp;</label>
-
-                                <ul class="actions">
-                                    <li>
-                                        <button type="submit" class="btn btn-outline-primary">create</button>
-                                    </li>
-                                </ul>
-                            </div>
-
                         </div>
                         </form>
         <div style="text-align: center;">
- <td> <button class="btns" onclick="deleteall()">remove all</button></td>
-     <td> <button class="btns"  onclick="editVoyage({{ voyages.id }})"  >edit trip</button></td>
+     <td> <button class="btn btn-outline-primary"  onclick="editVoyage({{voyages.id}})"  >Save</button></td>
 
 </div>
 <br><br>
@@ -160,49 +145,29 @@ location.reload()
 }
 
 
-function deleteall(){
+function editVoyage(id){
 
-$.ajax({
-			type: 'delete',
-			url: "http://localhost:3000/voyages/deleteAll",
-			dataType: 'json',
-			async: false,
-			success: (result) => {
-			}
-    })
-
-location.href="http://localhost:3000"
-}
-
-
-function editVoyage (id){
-location.href="http://localhost:3000/voyages/updateId/"+id
-}
-
-  $('#formulaire').on("submit",function (e){
-    e.preventDefault()
-      $.ajax({
-          type: 'post',
-          url: "http://localhost:3000/voyages/updateId/"+{{ voyages.pays }},
+if ($('#date_debut').val() <= $('#date_fin').val())
+              {
+        $.ajax({
+          type: 'put',
+          url: "http://localhost:3000/voyages/updateId/"+id,
            data:{
-              pays: $('#pays').val(),
-              prix: $('#prix').val(),
-              gouvernorat: $('#gouvernorat').val(),
-              date_debut: $('#date_debut').val(),
-              date_fin: $('#date_fin').val()
+                          pays: $('#pays').val(),
+                          prix: $('#prix').val(),
+                          gouvernorat: $('#gouvernorat').val(),
+                          date_debut: $('#date_debut').val(),
+                          date_fin: $('#date_fin').val()
           },
           dataType: 'json',
           async: false,
-          success: (result) => {
-              location.href="http://localhost:3000/hotel/all"
-          }
+          success:  function(data) {
+alert('Updated !'); }
       })
+           location.href = "http://localhost:3000/voyages/all"; }
+else alert("start date must be before End date'");
+}
 
-
- $('#formulaire2').on("submit",function (e){
-     e.preventDefault()
-    location.href="http://localhost:3000/voyages/byCountry/"+$( "#pays option:selected" ).text();
-  })
 
 
 </script>
