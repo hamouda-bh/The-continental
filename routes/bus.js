@@ -1,14 +1,28 @@
 const express = require('express');
 const router = express.Router();
 
-const bus = require('../controller/transport.controller.js');
+const transport = require('../controller/transport.controller.js');
 
-router.post('/addBus', Bus.create);
-router.get("/allBuses", Bus.findAll);
-router.get("/findByName/:nomBus", Bus.findByName);
-router.get("/findByCapacity/:busCapacity", Bus.findByCapacity);
-router.get("/findAllBusesWithDriverName", Bus.findBusesWithDriverName);
-router.delete("/deleteBusUsingId/:busId", Bus.deleteUsingId);
-router.delete("/deleteBusUsingName/:busId", Bus.deleteUsingName);
-router.delete("/deleteAllBuses", Bus.deleteAll);
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/addBus', transport.createBus);
+router.get("/allBuses", transport.findAllBuses);
+router.get("/findBusById/:busId", transport.findBusById);
+router.put("/updateBusById/:busId", transport.updateBusById);
+router.delete("/deleteBusUsingId/:busId", transport.deleteBusUsingId);
+router.delete("/deleteAllBuses", transport.deleteAllBuses);
+// router.get("/findByName/:busName", transport.findByName);
+// router.get("/findByCapacity/:busCapacity", transport.findByCapacity);
+// router.get("/findAllBusesWithDriverName/:driverName", transport.findBusesWithDriverName);
+// router.delete("/deleteBusUsingName/:busId", transport.deleteUsingName);
 module.exports = router;
