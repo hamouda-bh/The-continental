@@ -184,7 +184,7 @@ Hotel.updateById = (id, hotel, result) => {
             if (err) {
                 console.log("error: ", err);
                 result(null, err);
-                return;
+                 return;
             }
 
             if (res.affectedRows == 0) {

@@ -1,4 +1,4 @@
-const Circuit = require("../models/circuit.model.js");
+const Circuit = require('../models/circuit.model');
 
 // Create and Save a new Customer
 exports.create = (req, res) => {
@@ -30,15 +30,18 @@ exports.create = (req, res) => {
         else res.send(data);
     });
 };
+exports.affiche = (req, res) => {
+    res.render('Circuit/addCircuit');
+};
 // Retrieve all Customers from the database.
 exports.findAll = (req, res) => {
-    Circuit.getAll((err, data) => {
+    Circuit.getAll((err, rows) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving circuits."
             });
-        else res.send(data);
+        else res.render('Circuit/circuit', {circuits :rows});
     });
 };
 
@@ -55,37 +58,35 @@ exports.findOne = (req, res) => {
                     message: "Error retrieving Customer with id " + req.params.circuitId
                 });
             }
-        } else res.send(data);
+        }   else res.render('Circuit/circuit', {circuit :data});
     });
 };
-/*
+
 // Update a Customer identified by the customerId in the request
 exports.update = (req, res) => {
-    // Validate Request
     if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
     }
-
-    Hotel.updateById(
-        req.params.hotelId,
-        new Hotel(req.body),
+    Circuit.updateById(
+        req.params.circuitId,
+        new Circuit(req.body),
         (err, data) => {
             if (err) {
                 if (err.kind === "not_found") {
                     res.status(404).send({
-                        message: `Not found hotel with id ${req.params.hotelId}.`
+                        message: `Not found hotel with id ${req.params.circuitId}.`
                     });
                 } else {
                     res.status(500).send({
-                        message: "Error updating hotel with id " + req.params.hotelId
+                        message: "Error updating hotel with id " + req.params.circuitId
                     });
                 }
             } else res.send(data);
         }
     );
-};*/
+};
 // Delete a Customer with the specified customerId in the request
 exports.delete = (req, res) => {
     Circuit.remove(req.params.circuitId, (err, data) => {
@@ -99,7 +100,7 @@ exports.delete = (req, res) => {
                     message: "Could not delete hotel with id " + req.params.circuitId
                 });
             }
-        } else res.send({ message: `hotel was deleted successfully!` });
+        } else res.render('circuit/circuit', {circuits :data});
     });
 };
 // Delete all Customers from the database.
