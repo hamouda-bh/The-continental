@@ -54,35 +54,22 @@
     </nav>
     <div id="main">
     <div class="inner">
-    <h3>Gestion des peronnels <span class="pull-right" style="color: #148599">Affichage de tout les personnels</span></h3>
+    <h3>STAFF MANAGEMENT <span class="pull-right" style="color: #148599">Display of all staff</span></h3>
 
     <div class="container-fluid">
- <section>
-            <form id ="formulaire2" >
-				<div class="fields">
-                    <div class="field quarter">
-                      <label>ID Personnel :</label>
-                        <input id="personnelleId" type="text" placeholder="ID" />
-                    </div>
 
-                    <div class="field half">
-                    <button class="btn btn-outline-info" type="submit" >chercher</button>
-                    </div>
-                </div>
-            </form>
-        </section>
     <div class="table-responsive">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
             <thead>
             <tr>
-                <th>Nom personnel</th>
-                <th>Prénom personnel</th>
-                <th>age</th>
-                <th>fonction</th>
-                <th>salaire</th>
-                <th>date debut contrat</th>
-                <th>date fin contrat</th>
-                <th>Suppression</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Fonction</th>
+                <th>Salary</th>
+                <th>contract start date</th>
+                <th>contract end date</th>
+                <th>Deletion</th>
                 <th>Modification</th>
             </tr>
             </thead>
@@ -99,8 +86,8 @@
                 <td>{{ personnelle.salaire }}</td>
                 <td>{{ personnelle.date_debut_contrat }}</td>
                 <td>{{ personnelle.date_fin_contrat }}</td>
-                 <td> <button class="btn btn-outline-danger" onclick="deleteOne({{personnelle.id}})" >Supprimer </button></td>
-                 <td> <button class="btn btn-outline-primary" onclick="findOne({{ personnelle.id }})">Modifier </button></td>
+                 <td> <button class="btn btn-outline-danger" onclick="deleteOne({{personnelle.id}})" >Remove </button></td>
+                 <td> <button class="btn btn-outline-primary" onclick="findOne({{ personnelle.id }})">Edit </button></td>
             </tr>
                 {% endfor %}
             </tbody>
