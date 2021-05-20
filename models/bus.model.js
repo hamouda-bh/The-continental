@@ -1,19 +1,14 @@
 const sql = require("./db.js");
-
+const Driver = require("../models/driver.model.js");
 //constructor
 const Bus = function(bus){
     this.nom = bus.nom;
-    this.id_chauffer = bus.id_chauffer;
-    this.capacite = bus.capacite;
+    this.id_driver = bus.id_driver;
+    this.driver_full_name = Driver.getDriverNameUsingId(this.id_driver) + "" + Driver.getDriverLastNameUsingId(this.id_driver);
+    this.capacity = bus.capacity;
     this.minibus = bus.minibus;
-    this.prix_location_jour = bus.prix_location_jour;
+    this.rent_price_per_day = bus.rent_price_per_day;
 };
-
-
-
-
-
-
 
 Bus.createBus = (newBus, result) => {
     sql.query("INSERT INTO bus SET ?",newBus,(err,res) =>{
@@ -64,8 +59,8 @@ Bus.findBusById = (busId, result) => {
 
 Bus.updateBusById = (busId, bus, result) => {
     sql.query(
-        "UPDATE bus SET nom = ?,id_chauffer = ?,capacite = ?, minibus = ?, prix_location_jour = ?  WHERE id = ?",
-        [bus.nom, bus.id_chauffer, bus.capacite, bus.minibus, bus.prix_location_jour, busId],
+        "UPDATE bus SET nom = ?,id_driver = ?,capacity = ?, minibus = ?, rent_price_per_day = ?  WHERE id = ?",
+        [bus.nom, bus.id_driver, bus.capacity, bus.minibus, bus.rent_price_per_day, busId],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -135,7 +130,7 @@ Bus.deleteAllBuses = result => {
 // };
 
 // Bus.findBusesWithDriverName =  (driverName, result) => {
-//   sql.query(`SELECT b.nom,p.nom FROM bus AS b INNER JOIN personnelle AS p WHERE b.id_chauffer = {$driverName}`,(err,res)=>{
+//   sql.query(`SELECT b.nom,p.nom FROM bus AS b INNER JOIN personnelle AS p WHERE b.id_driver = {$driverName}`,(err,res)=>{
 //       if(err) {
 //           console.log("error: ",err);
 //           result(err, null);
@@ -151,7 +146,7 @@ Bus.deleteAllBuses = result => {
 // };
 
 // Bus.findByCapacity = (busCapacity, result) => {
-//     sql.query(`SELECT * FROM bus WHERE capacite= ${busCapacity}` ,(err,res) =>{
+//     sql.query(`SELECT * FROM bus WHERE capacity= ${busCapacity}` ,(err,res) =>{
 //         if(err) {
 //             console.log("error: ",err);
 //             result(err, null);

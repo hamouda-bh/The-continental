@@ -97,31 +97,28 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
             <thead  id="head">
             <tr>
-                <th>Nom hotel</th>
-                <th>Gouvernorat</th>
-                <th>Nombre des chambres single</th>
-                <th>Nombre des chambres double</th>
-                <th>Nombre des chambres triple</th>
-                <th>prix des chambres single</th>
-                <th>prix des chambres double</th>
-                <th>prix des chambres triple</th>
+                <th>Nom Bus</th>
+                <th>Driver_id</th>
+                <th>Capacity</th>
+                <th>Minibus</th>
+                <th>$$ per days</th>
                 <th>Suppression</th>
                 <th>enregistrer</th>
 
             </tr>
             </thead>
-            {% if hotel|length == 0 %}
-            Il n'y a aucun hotel à afficher.
+            {% if bus|length == 0 %}
+            Il n'y a aucun bus à afficher.
             {% else %}
 
             <tbody>
             <tr>
-                <td><p id="name">{{ hotel.name }}</p></td>
-                <td><p id="gouvernorat">{{ hotel.gouvernorat }}</p></td>
-                <td> <input type="text" id="nombreS" value="{{ hotel.nbr_chambre_single }}"/></td>
-                <td> <input type="text" id="nombreD" value="{{ hotel.nbr_chambre_double }}"/></td>
-                <td><input type="text" id="nombreT" value="{{ hotel.nbr_chambre_triple }}"/></td>
-                <td><input type="text" id="prixS" value="{{ hotel.prix_nuit_single }}"/></td>
+                <td><p id="name">{{ bus.name }}</p></td>
+                <td><p id="gouvernorat">{{ bus.id_chauffeur }}</p></td>
+                <td> <input type="text" id="nombreS" value="{{ bus.capacity }}"/></td>
+                <td> <input type="text" id="nombreD" value="{{ bus.nbr_chambre_double }}"/></td>
+                <td><input type="text" id="nombreT" value="{{ bus.nbr_chambre_triple }}"/></td>
+                <td><input type="text" id="prixS" value="{{ bus.prix_nuit_single }}"/></td>
                 <td><input type="text" id="prixD" value="{{ hotel.prix_nuit_double }}"/></td>
                 <td><input type="text" id="prixT" value="{{ hotel.prix_nuit_triple }}"/></td>
                 <td> <button class="btn btn-outline-danger" onclick="deleteOne({{hotel.id}})">remove</button></td>

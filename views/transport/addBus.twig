@@ -1,0 +1,145 @@
+{% extends 'layout.twig' %}
+
+  {% block stylesheets %}
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
+  {% endblock %}
+
+{% block body %}
+
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <div class="inner">
+
+                <!-- Logo -->
+                <a href="fichiersHtml/index.html" class="logo">
+                    <span class="fa fa-plane"></span> <span class="title">The continental</span>
+                </a>
+
+                <!-- Nav -->
+                <nav>
+                    <ul>
+                        <li><a href="#menu">Menu</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="fichiersHtml/index.html">Home</a></li>
+
+                <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
+
+                <li><a href="fichiersHtml/blog.html">Blog</a></li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle">About</a>
+
+                    <ul>
+                        <li><a href="fichiersHtml/about.html">About Us</a></li>
+                        <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
+                        <li><a href="fichiersHtml/terms.html">Terms</a></li>
+                    </ul>
+                </li>
+                <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div id="main">
+            <div class="inner">
+                <section>
+                    <h2>Ajouter un bus</h2>
+                    <form id="formulaire">
+                        <div class="fields">
+                            <div class="field half">
+                                <input type="text" name="name" id="name" placeholder="Type the bus name" />
+                            </div>
+
+                            <div class="field half">
+                                <input type="text" name="id_chauffer" id="id_chauffer" placeholder="Select the bus driver" />
+                            </div>
+
+                            <div class="field half">
+                                <input type="text" name="capacite" id="capacite" placeholder="Nombre Chambre Single" />
+                            </div>
+
+                            <div class="field quarter">
+{#                                <input type="text" name="nombreD" id="nombreD" placeholder="Nombre Chambre Double" />#}
+                                <select>
+                                    <option>Minibus</option>
+                                    <option>Normal</option>
+                                </select>
+                            </div>
+                            <div class="field quarter">
+                                <select>
+                                    <option>Confort</option>
+                                    <option>Normal</option>
+                                </select>
+                            </div>
+
+                            <div class="field text-right">
+                                <label>&nbsp;</label>
+
+                                <ul class="actions">
+                                    <li>
+                                        <button type="submit" class="btn btn-outline-primary">create</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+  {% block javascriptsAtTheEnd %}
+      <script src="/javascripts/jquery.min.js"></script>
+      <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="/javascripts/jquery.scrolly.min.js"></script>
+      <script src="/javascripts/jquery.scrollex.min.js"></script>
+      <script src="/javascripts/main.js"></script>
+      <script>
+
+          $('#formulaire').on("submit",function (e){
+              e.preventDefault()
+              $.ajax({
+                  type: 'post',
+                  url: "http://localhost:3000/transport/addBus",
+                  data:{
+                      name: $('#name').val(),
+                      id_chauffer: $('#id_chafffer').val(),
+                      capacite: $('#capacite').val(),
+                      minibus: $('#minibus').val(),
+                      prix_location_jour: $('#prix_location_jour').val(),
+
+                  },
+                  dataType: 'json',
+                  async: false,
+                  success: (result) => {
+                      location.href="http://localhost:3000/transport/allBuses"
+                  }
+              })
+              // location.href="http://localhost:3000/transport/all"
+
+          })
+
+
+      </script>
+  {% endblock %}

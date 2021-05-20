@@ -3,18 +3,6 @@ const router = express.Router();
 
 const transport = require('../controller/transport.controller.js');
 
-
-
-
-
-
-
-
-
-
-
-
-
 router.post('/addBus', transport.createBus);
 router.get("/allBuses", transport.findAllBuses);
 router.get("/findBusById/:busId", transport.findBusById);
