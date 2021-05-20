@@ -7,12 +7,15 @@ var logger = require('morgan');
  require('./models/hotel.model.js');
  require('./models/personnelle.model.js');
  require('./models/circuit.model.js');
+ require('./models/bus.model.js');
 var indexRouter = require('./routes/index');
 var hotelRouter = require('./routes/hotel');
 var voyagesRouter = require('./routes/voyages');
 var usersRouter = require('./routes/users');
 var personnelleRouter = require ('./routes/personnelle');
 var circuitRouter= require('./routes/circuit');
+var busRouter = require ('./routes/bus');
+
 var logger = require('morgan');
 var logger = require('morgan');
 var app = express();
@@ -38,6 +41,8 @@ app.use('/voyages', voyagesRouter);
 app.use('/users', usersRouter);
 app.use('/personnelle',personnelleRouter);
 app.use('/circuit',circuitRouter);
+app.use('/transport',busRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

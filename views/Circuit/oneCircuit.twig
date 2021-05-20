@@ -103,11 +103,10 @@
                 <th>Longeur</th>
                 <th>Duree</th>
                 <th>Suppression</th>
-                <th>Details</th>
 
             </tr>
             </thead>
-            {% if hotel|length == 0 %}
+            {% if circuit|length == 0 %}
             Il n'y a aucun circuit à afficher.
             {% else %}
 
@@ -117,10 +116,10 @@
                 <td><p id="depart">{{ circuit.depart }}</p></td>
                 <td><p id="arrive">{{ circuit.arrive }}</p></td>
 
-                <td> <input type="text" id="nombreT" value="{{ circuit.longeur }}"/></td>
-                <td> <input type="text" id="nombreF" value="{{ circuit.duree }}"/></td>
+                <td> <input type="text" id="longeur" value="{{ circuit.longeur }}"/></td>
+                <td> <input type="text" id="duree" value="{{ circuit.duree }}"/></td>
                 <td> <button class="btn btn-outline-danger" onclick="deleteOne({{circuit.id}})">remove</button></td>
-                <td> <button class="btn btn-outline-primary" onclick="updateOne({{hotel.id}})">enregistrer</button></td>
+                <td> <button class="btn btn-outline-primary" onclick="updateone({{circuit.id}})">enregistrer</button></td>
             </tr>
             </tbody>
             {% endif %}
@@ -161,13 +160,13 @@
             type: 'put',
             url: "http://localhost:3000/circuit/updateone/"+id,
             data:{
-                longeur: $('#nombreT').val(),
-                duree: $('#nombreF').val()
+                longeur: $('#longeur').val(),
+                duree: $('#duree').val()
             },
             dataType: 'json',
             async: false,
             success: (result) => {
-             //   location.href="http://localhost:3000/circuit/findOne/"+id
+                location.href="http://localhost:3000/circuit/all"
             }
         })
         location.reload()

@@ -24,4 +24,6 @@ router.get("/byCountry/:pays", Voyages.findByCountry,Voyages.findCountry);
 
 router.get('/pays',Voyages.findCountry);
 
+router.put("/updateId/:voyagesId", Voyages.update);
+
 module.exports= router;

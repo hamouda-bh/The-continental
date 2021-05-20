@@ -58,7 +58,7 @@ exports.findOne = (req, res) => {
                     message: "Error retrieving Customer with id " + req.params.circuitId
                 });
             }
-        }   else res.render('Circuit/circuit', {circuit :data});
+        }   else res.render('Circuit/oneCircuit', {circuit :data});
     });
 };
 

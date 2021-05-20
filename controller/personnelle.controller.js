@@ -48,7 +48,7 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single personnel with a personnelId
-exports.onePersonnel = (req, res) => {
+exports.findOne = (req, res) => {
     Personnelle.findById(req.params.personnelleId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {

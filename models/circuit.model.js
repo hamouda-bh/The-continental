@@ -23,7 +23,7 @@ Circuit.create = (newCircuit, result) => {
     });
 };
 
-Circuit.findById = (CircuitId, result) => {
+Circuit.findById = (circuitId, result) => {
     sql.query(`SELECT * FROM circuit WHERE id = ${circuitId}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -57,8 +57,8 @@ Circuit.getAll = result => {
 
 Circuit.updateById = (id, circuit, result) => {
     sql.query(
-        "UPDATE circuit SET nom = ?, depart = ?, arrive = ?,longeur=?,duree=? WHERE id = ?",
-        [circuit.nom, circuit.depart, circuit.arrive,circuit.longeur,circuit.duree, id],
+        "UPDATE circuit SET longeur=?,duree=? WHERE id = ?",
+        [circuit.longeur,circuit.duree, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

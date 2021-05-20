@@ -62,7 +62,7 @@
 				<div class="fields">
                     <div class="field quarter">
                       <label>ID Personnel :</label>
-                        <input id="id" type="text" placeholder="ID" />
+                        <input id="personnelleId" type="text" placeholder="ID" />
                     </div>
 
                     <div class="field half">
@@ -112,24 +112,11 @@
 
 </div>
 <br><br>
-        <h3><span class="pull-right"style="color: #148599">chercher prix par date</span></h3>
+
 <br>
 
         <div style="text-align: center;">
-        <section>
-            <form id ="formulaire1">
-				<div class="fields">
-                    <div class="field quarter">
-                    <label>date d'arrivé :</label>
-                        <input id="date" type="date" placeholder="From 08.07.2020" />
-                        <input id="nom" type="text" placeholder="Name" />
-                    </div>
-                    <div class="field half">
-                    <button class="btn btn-outline-info" type="submit" >chercher les prix</button>
-                    </div>
-                </div>
-            </form>
-        </section>
+
 <br>
 <br>
 <br>
@@ -171,8 +158,9 @@ $.ajax({
 location.reload()
 }
 function findOne (id){
-location.href="http://localhost:3000/hotel/findOne/"+id
+location.href="http://localhost:3000/personnelle/findOne/"+id
 }
+
 function deleteall(){
 
 $.ajax({
@@ -200,7 +188,7 @@ location.href="http://localhost:3000/personnelle/form"
  $('#formulaire2').on("submit",function (e){
      e.preventDefault()
 
-     location.href="http://localhost:3000/personnelle/onePersonnel/"
+     location.href="http://localhost:3000/personnelle/onePersonnel/"+$('#personnelleId').val()
 
   })
   $(document).ready(function () {

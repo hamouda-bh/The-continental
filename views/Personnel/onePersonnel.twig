@@ -3,7 +3,6 @@
   {% block stylesheets %}
       <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="/stylesheets/main.css" />
-      <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
       <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
   {% endblock %}
 
@@ -54,13 +53,50 @@
     </nav>
     <div id="main">
     <div class="inner">
-    <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Affichage du personnel ayant cet id</span></h3>
+    <h3>Detail du personnel</h3>
 
     <div class="container-fluid">
+        <div class="col-lg-9">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="/images/product-1-720x480.jpg" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="/images/product-2-720x480.jpg" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="/images/product-3-720x480.jpg" alt="Third slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="/images/product-4-720x480.jpg" alt="Fourth slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="/images/product-5-720x480.jpg" alt="Fifth slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <br><br>
 
     <div class="table-responsive">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
-            <thead>
+             <thead  id="head">
             <tr>
                 <th>Nom personnel</th>
                 <th>prenom</th>
@@ -76,28 +112,32 @@
             {% else %}
 
             <tbody>
-                {% for personnelle in personnels %}
+
             <tr>
-                <td>{{ personnelle.nom }}</td>
-                <td>{{ personnelle.prenom }}</td>
-                <td>{{ personnelle.age }}</td>
-                <td>{{ personnelle.fonction }}</td>
-                <td>{{ personnelle.salaire }}</td>
-                <td>{{ personnelle.date_debut_contrat }}</td>
-                <td>{{ personnelle.date_fin_contrat }}</td>
-                 <td> <button class="btn btn-outline-danger" onclick="deleteOne({{personnelle.id}})" >Supprimer </button></td>
-                 <td> <button class="btn btn-outline-primary" onclick="findOne({{ personnelle.id }})">Modifier </button></td>
+                                    <td> <input type="text" id="nom" value="{{ personnels.nom }}"/></td>
+                                    <td> <input type="text" id="prenom" value="{{ personnels.prenom }}"/></td>
+                                    <td><input type="text" id="age" value="{{ personnels.age }}"/></td>
+                                    <td><input type="text" id="fonction" value="{{ personnels.fonction }}"/></td>
+                                    <td><input type="text" id="salaire" value="{{ personnels.salaire }}"/></td>
+                                    <td><input type="text" id="date debut contrat" value="{{  personnels.date_debut_contrat }}"/></td>
+                                    <td><input type="text" id="date fin contrat" value="{{  personnels.date_fin_contrat }}"/></td>
+                                     <td> <button class="btn btn-outline-danger" onclick="deleteOne({{personnelle.id}})">supprimer</button></td>
+                                    <td> <button class="btn btn-outline-primary" onclick="updateOne({{personnelle.id}})">enregistrer</button></td>
             </tr>
-                {% endfor %}
+
             </tbody>
             {% endif %}
         </table>
-        <div style="text-align: center;">
-     <td> <button class="btn btn-outline-danger" onclick="deleteall()">remove all</button></td>
+    </div>
 
-</div>
-</div>
-    <br>
+        <br>
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+
 
 
  {% endblock %}
@@ -123,14 +163,29 @@ $.ajax({
 })
 location.reload()
 }
-function findOne (id){
-location.href="http://localhost:3000/hotel/findOne/"+id
-}
-function deleteall (){
-location.href="http://localhost:3000/personnelle/deleteAll"
-}
-$(document).ready(function () {
-    $('#tab').DataTable();
-});
+  function updateOne(id){
+              $.ajax({
+                  type: 'put',
+                  url: "http://localhost:3000/personnelle/updatePersonnelle/"+id,
+                  data:{
+                      nom: $('#nom').val(),
+                      prenom: $('#prenom').val(),
+                     age: $('#age').val(),
+                      fonction: $('#fonction').val(),
+                      salaire: $('#salaire').val(),
+                      date_debut_contrat: $('#dateDebutContrat').val(),
+                      date_fin_contrat: $('#dateFinContrat').val()
+                  },
+                  dataType: 'json',
+                  async: false,
+                  success: (result) => {
+                      // location.href="http://localhost:3000/personnelle/findOne/"+id
+                  }
+              })
+              location.reload()
+
+          }
+
+
 </script>
 {% endblock %}

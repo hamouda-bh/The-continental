@@ -9,6 +9,8 @@ exports.create = (req, res) => {
     }
 
     // Create a Customer
+
+
     const hotel = new Hotel({
         name: req.body.name,
         gouvernorat: req.body.gouvernorat,

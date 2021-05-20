@@ -116,7 +116,7 @@
                 <td>{{ circuit.longeur }}</td>
                 <td>{{ circuit.duree }}</td>
                 <td> <button class="btn btn-outline-danger" onclick="deleteOne({{circuit.id}})" >remove </button></td>
-                <td> <button class="btn btn-outline-primary" onclick="updateOne({{ circuit.id }})">details </button></td>
+                <td> <button class="btn btn-outline-primary" onclick="findOne({{ circuit.id }})">details </button></td>
             </tr>
                 {% endfor %}
             </tbody>
@@ -174,15 +174,8 @@ location.href="http://localhost:3000/circuit/findOne/"+id
 }
 */
 function findOne (id){
-$.ajax({
-			type: 'details',
-			url: "http://localhost:3000/circuit/findOne/"+id,
-			dataType: 'json',
-			async: false,
-			success: (result) => {
-			}
-})
-location.reload()
+
+location.href="http://localhost:3000/circuit/findOne/"+id
 }
 function deleteall(){
 
@@ -195,9 +188,8 @@ $.ajax({
 			}
     })
 
-location.href="http://localhost:3000"
+location.href="http://localhost:3000/circuit/all"
 }
-
 function addCircuit (){
 location.href="http://localhost:3000/circuit/form"
 }

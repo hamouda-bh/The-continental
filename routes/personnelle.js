@@ -7,9 +7,9 @@ router.post("/add", personnelle.create);
 
 router.get("/all", personnelle.findAll);
 
-router.get("/onePersonnel/:personnelleId", personnelle.onePersonnel);
+router.get("/findOne/:personnelleId", personnelle.findOne);
 
-router.put("/personnelle/:personnelleId", personnelle.update);
+router.put("/updatePersonnelle/:personnelleId", personnelle.update);
 
 router.delete("/deleteOne/:personnelleId", personnelle.delete);
 router.delete("/deleteAll", personnelle.deleteAll);
