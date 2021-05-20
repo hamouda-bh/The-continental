@@ -1,4 +1,5 @@
 const Bus = require("../models/bus.model.js");
+const Driver = require("../models/driver.model.js");
 // const Voiture = require("../models/voiture.model.js");
 
 // Create and Save a new Customer
@@ -13,7 +14,7 @@ exports.createBus = (req, res) => {
     // Create a Bus
     const bus = new Bus({
         nom: req.body.nom,
-        id_chauffer: req.body.id_chauffer,
+        id_chauffeur: req.body.id_chauffeur,
         capacite: req.body.capacite,
         minibus:req.body.minibus,
         prix_location_jour:req.body.prix_location_jour,
@@ -110,6 +111,7 @@ exports.deleteAllBuses = (req, res) => {
         else res.send({ message: `All buses were deleted successfully!` });
     });
 };
+
 
 // Remove a Bus buy typing its Name
 // exports.deleteUsingName = (req, res) => {

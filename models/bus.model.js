@@ -3,17 +3,11 @@ const sql = require("./db.js");
 //constructor
 const Bus = function(bus){
     this.nom = bus.nom;
-    this.id_chauffer = bus.id_chauffer;
+    this.id_chauffeur = bus.id_chauffeur;
     this.capacite = bus.capacite;
     this.minibus = bus.minibus;
     this.prix_location_jour = bus.prix_location_jour;
 };
-
-
-
-
-
-
 
 Bus.createBus = (newBus, result) => {
     sql.query("INSERT INTO bus SET ?",newBus,(err,res) =>{
@@ -64,8 +58,8 @@ Bus.findBusById = (busId, result) => {
 
 Bus.updateBusById = (busId, bus, result) => {
     sql.query(
-        "UPDATE bus SET nom = ?,id_chauffer = ?,capacite = ?, minibus = ?, prix_location_jour = ?  WHERE id = ?",
-        [bus.nom, bus.id_chauffer, bus.capacite, bus.minibus, bus.prix_location_jour, busId],
+        "UPDATE bus SET nom = ?,id_chauffeur = ?,capacite = ?, minibus = ?, prix_location_jour = ?  WHERE id = ?",
+        [bus.nom, bus.id_chauffeur, bus.capacite, bus.minibus, bus.prix_location_jour, busId],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -135,7 +129,7 @@ Bus.deleteAllBuses = result => {
 // };
 
 // Bus.findBusesWithDriverName =  (driverName, result) => {
-//   sql.query(`SELECT b.nom,p.nom FROM bus AS b INNER JOIN personnelle AS p WHERE b.id_chauffer = {$driverName}`,(err,res)=>{
+//   sql.query(`SELECT b.nom,p.nom FROM bus AS b INNER JOIN personnelle AS p WHERE b.id_chauffeur = {$driverName}`,(err,res)=>{
 //       if(err) {
 //           console.log("error: ",err);
 //           result(err, null);
