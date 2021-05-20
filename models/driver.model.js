@@ -40,7 +40,64 @@ Driver.findAllDrivers = result => {
 };
 
 Driver.findDriverById = (driverId, result) => {
-    sql.query(`SELECT * FROM personelle WHERE id = ${driverId}`, (err, res) => {
+    sql.query(`SELECT nom,prenom FROM personelle WHERE id = ${driverId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("found driver: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+
+        // not found Customer with the id
+        result({ kind: "not_found" }, null);
+    });
+};
+
+Driver.getDriverNameUsingId = (driverId, result) => {
+    sql.query(`SELECT prenom FROM personelle WHERE id = ${driverId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("found driver: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+
+        // not found Customer with the id
+        result({ kind: "not_found" }, null);
+    });
+};
+
+Driver.getDriverLastNameUsingId = (driverId, result) => {
+    sql.query(`SELECT nom FROM personelle WHERE id = ${driverId}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("found driver: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+
+        // not found Customer with the id
+        result({ kind: "not_found" }, null);
+    });
+};
+
+Driver.getDriverIdUsingNameAndLastName = (driverName,driverLastName, result) => {
+    sql.query(`SELECT id_personelle FROM personelle WHERE (prenom = ${driverName} AND nom = ${driverLastName}) `, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
