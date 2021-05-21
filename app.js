@@ -17,6 +17,8 @@ var personnelleRouter = require ('./routes/personnelle');
 var circuitRouter= require('./routes/circuit');
 var busRouter = require ('./routes/bus');
 var driverRouter = require ('./routes/driver');
+var transportRouter = require ('./routes/transport');
+
 
 var logger = require('morgan');
 var circuitRouter = require('./routes/circuit');
@@ -44,8 +46,9 @@ app.use('/voyages', voyagesRouter);
 app.use('/users', usersRouter);
 app.use('/circuit',circuitRouter);
 app.use('/personnelle',personnelleRouter);
-app.use('/transport',busRouter);
-app.use('/drivers',driverRouter)
+app.use('/buses',busRouter);
+app.use('/drivers',driverRouter);
+app.use('/transport',transportRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

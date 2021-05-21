@@ -34,7 +34,7 @@ Bus.findAllBuses = result => {
             result(null,res);
             return;
         }
-        res.render("/transport/transport",{buses:res});
+        res.render("/transport/buses",{buses:res});
     });
 };
 

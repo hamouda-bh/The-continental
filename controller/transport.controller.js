@@ -1,5 +1,12 @@
 const Bus = require("../models/bus.model.js");
+
 // const Voiture = require("../models/voiture.model.js");
+
+exports.displayTransPage= (req,res) =>{
+    res.render('transport/transport');
+}
+
+
 // Create and Save a new Customer
 exports.createBus = (req, res) => {
     // Validate request
@@ -37,7 +44,7 @@ exports.findAllBuses = (req, res) => {
                 message:
                     err.message || "Some error occurred while retrieving Buses."
             });
-        else res.render('transport/transport',{buses : rows});
+        else res.render('transport/buses',{buses : rows});
     });
 };
 

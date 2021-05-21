@@ -33,18 +33,22 @@
      <nav id="menu">
        <h2>Menu</h2>
        <ul>
-         <li><a href="http://localhost:3000/" class="active">Home</a></li>
+         <li><a href="index.html" class="active">Home</a></li>
 
-         <li><a href="http://localhost:3000/voyages/all" >Trips management</a></li>
+         <li><a href="http://localhost:3000/voyages/all" class="active">Trips management</a></li>
 
          <li><a href="http://localhost:3000/hotel/all">Hotel management</a></li>
 
+         <li>
+           <a href="#" class="dropdown-toggle">About</a>
 
-         <li><a href="http://localhost:3000/personnelle/all">Staff management</a></li>
-         <li><a href="http://localhost:3000/transport/transport">Transport management</a></li>
-         <li><a href="http://localhost:3000/reservation/all">Reservations management</a></li>
-
-         <li><a href="http://localhost:3000/circuit/all">Circuit management</a></li>
+           <ul>
+             <li><a href="fichiersHtml/about.html">About Us</a></li>
+             <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
+             <li><a href="fichiersHtml/terms.html">Terms</a></li>
+           </ul>
+         </li>
+         <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
        </ul>
      </nav>
 
@@ -116,7 +120,7 @@
 
            <article class="style2">
 									<span class="image">
-										<img src="/images/product-2-720x480.jpg" alt="" />
+										<img src="/images/" alt="" />
 									</span>
              <a href="http://localhost:3000/voyages/all">
 
@@ -159,16 +163,16 @@
 									<span class="image">
 										<img src="/images/product-4-720x480.jpg" alt="" />
 									</span>
-             <a href="http://localhost:3000/circuit/all">
-               <h2>Circuit</h2>
+             <a href="fichiersHtml/package-details.html">
+               <h2>Lorem ipsum dolor sit amet, consectetur</h2>
 
-               <p><strong>Circuit Mangement</strong></p>
+               <p><strong>$300.00 - $400.00</strong></p>
 
                <p>
                  <small>
-                   <i class="fa fa-calendar"></i> add &nbsp;
-                   <i class="fa fa-cube"></i> edit &nbsp;
-                   <i class="fa fa-plane"></i> search and delete
+                   <i class="fa fa-calendar"></i> Spring &nbsp;
+                   <i class="fa fa-cube"></i> 20 nights &nbsp;
+                   <i class="fa fa-plane"></i> Flight included
                  </small>
                </p>
              </a>
@@ -178,7 +182,7 @@
 									<span class="image">
 										<img src="/images/product-5-720x480.jpg" alt="" />
 									</span>
-             <a href="http://localhost:3000/transport/allBuses">
+             <a href="http://localhost:3000/transport/displayTransPage">
                <h2>Transport Management</h2>
 
                <p><strong>The Continental Rental</strong></p>
@@ -212,50 +216,19 @@
              </a>
            </article>
          </section>
-<!--
-         <p class="text-center"><a href="fichiersHtml/packages.html">View Packages &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
+         <ul class="copyright">
+           <li>Copyright © 2021 The continental </li>
+           <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+         </ul>
+       </div>
+       </footer>
+     </div>
+   {% endblock %}
 
-         <br>
-
-         <h2 class="h2">Testimonials</h2>
-
-         <div class="row">
-           <div class="col-sm-6 text-center">
-             <p class="m-n"><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt delectus mollitia, debitis architecto recusandae? Quidem ipsa, quo, labore minima enim similique, delectus ullam non laboriosam laborum distinctio repellat quas deserunt voluptas reprehenderit dignissimos voluptatum deleniti saepe. Facere expedita autem quos."</em></p>
-
-             <p><strong> - John Doe</strong></p>
-           </div>
-
-           <div class="col-sm-6 text-center">
-             <p class="m-n"><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt delectus mollitia, debitis architecto recusandae? Quidem ipsa, quo, labore minima enim similique, delectus ullam non laboriosam laborum distinctio repellat quas deserunt voluptas reprehenderit dignissimos voluptatum deleniti saepe. Facere expedita autem quos."</em></p>
-
-             <p><strong>- John Doe</strong> </p>
-           </div>
-         </div>
-
-         <p class="text-center"><a href="fichiersHtml/testimonials.html">Read More &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
-
-         <br>
-
-         <h2 class="h2">Blog</h2>
-
-         <div class="row">
-           <div class="col-sm-4 text-center">
-             <img src="/images/blog-1-720x480.jpg" class="img-fluid" alt="" />
-
-             <h2 class="m-n"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
-
-             <p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
-           </div>
-
-           <div class="col-sm-4 text-center">
-             <img src="/images/blog-2-720x480.jpg" class="img-fluid" alt="" />
-
-             <h2 class="m-n"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
-
-             <p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
-           </div>
-
-           <div class="col-sm-4 text-center">
-             <img src="/images/blog-3-720x480.jpg" class="img-fluid" alt="" />
-ص
+   {% block javascriptsAtTheEnd %}
+     <script src="/javascripts/jquery.min.js"></script>
+     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <script src="/javascripts/jquery.scrolly.min.js"></script>
+     <script src="/javascripts/jquery.scrollex.min.js"></script>
+     <script src="/javascripts/main.js"></script>
+   {% endblock %}

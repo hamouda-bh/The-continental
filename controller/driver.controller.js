@@ -1,5 +1,9 @@
 const Driver = require("../models/driver.model.js");
 
+exports.displayDriverManagement = (req,res) => {
+    this.findAllDrivers();
+};
+
 //Creating Driver instance
 exports.createDriver = (req, res) => {
     newDriver, (req, res) => {
