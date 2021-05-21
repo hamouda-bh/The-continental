@@ -9,6 +9,7 @@ router.get("/findBusById/:busId", transport.findBusById);
 router.put("/updateBusById/:busId", transport.updateBusById);
 router.delete("/deleteBusUsingId/:busId", transport.deleteBusUsingId);
 router.delete("/deleteAllBuses", transport.deleteAllBuses);
+
 // router.get("/findByName/:busName", transport.findByName);
 // router.get("/findByCapacity/:busCapacity", transport.findByCapacity);
 // router.get("/findAllBusesWithDriverName/:driverName", transport.findBusesWithDriverName);
