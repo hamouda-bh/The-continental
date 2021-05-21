@@ -1,4 +1,5 @@
 const Bus = require("../models/bus.model.js");
+const Driver = require("../models/driver.model.js");
 // const Voiture = require("../models/voiture.model.js");
 
 // Create and Save a new Customer
@@ -13,10 +14,10 @@ exports.createBus = (req, res) => {
     // Create a Bus
     const bus = new Bus({
         nom: req.body.nom,
-        id_chauffer: req.body.id_chauffer,
-        capacite: req.body.capacite,
+        id_driver: Driver.findDriverById(driverId),
+        capacity: req.body.capacity,
         minibus:req.body.minibus,
-        prix_location_jour:req.body.prix_location_jour,
+        rent_price_per_day:req.body.rent_price_per_day,
     });
 
     // Save Customer in the database
@@ -32,13 +33,13 @@ exports.createBus = (req, res) => {
 
 // Retrieve all Buses from the database.
 exports.findAllBuses = (req, res) => {
-    Bus.findAllBuses((err, data) => {
+    Bus.findAllBuses((err, rows) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving Buses."
             });
-        else res.send(data);
+        else res.render('transport/transport',{buses : rows});
     });
 };
 
@@ -55,7 +56,7 @@ exports.findBusById = (req, res) => {
                     message: "Error retrieving bus with id " + req.params.busId
                 });
             }
-        }
+        } else res.send(data);
     });
 };
 
@@ -84,13 +85,18 @@ exports.updateBusById = (req, res) => {
 
 // Remove a Bus from the database where the id = busId
 exports.deleteBusUsingId = (req, res) => {
-    Bus.deleteBusUsingId((err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Buses."
-            });
-        else res.send(data);
+    Bus.deleteBusUsingId(req.params.busId, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found bus with id ${req.params.busId}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Could not delete bus with id " + req.params.busId
+                });
+            }
+        } else res.send({ message: `bus was deleted successfully!` });
     });
 };
 
@@ -100,11 +106,12 @@ exports.deleteAllBuses = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving Buses."
+                    err.message || "Some error occurred while removing all buses."
             });
-        else res.send(data);
+        else res.send({ message: `All buses were deleted successfully!` });
     });
 };
+
 
 // Remove a Bus buy typing its Name
 // exports.deleteUsingName = (req, res) => {
@@ -146,3 +153,63 @@ exports.deleteAllBuses = (req, res) => {
 //         });
 //     }
 // };
+
+//Creating Driver instance
+exports.createDriver = (req, res) => {
+    // Validate request
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+    // Create a Bus
+    const driver = new Driver({
+        nom : req.body.nom,
+        prenom : req.body.prenom,
+        age : req.body.age,
+        fonction : "chauffeur",
+        salaire : req.body.salaire,
+        date_debut_contrat : req.body.date_debut_contrat,
+        date_fin_contrat : req.body.date_fin_contrat
+    });
+
+    // Save Customer in the database
+    Driver.createBus(bus, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Driver."
+            });
+        else res.send(data);
+    });
+};
+
+//Display all the driver
+exports.findAllDrivers = (req,res) => {
+    Driver.findAllDrivers ( (err,data) => {
+        if(err)
+            res.status(404).send({
+                message:
+                    err.message || "Not found drivers due to an error."
+            });
+        else res.send(data);
+    });
+};
+
+//Find a certain driver by id
+exports.findDriverById = (req, res) => {
+    Driver.findDriverById(req.params.driverId,(err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found driver with id ${req.params.busId}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving driver with id " + req.params.busId
+                });
+            }
+        } else res.send(data);
+    });
+};
