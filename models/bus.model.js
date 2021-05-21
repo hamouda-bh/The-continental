@@ -34,7 +34,7 @@ Bus.findAllBuses = result => {
             result(null,res);
             return;
         }
-        result({ kind: "not_found" },null);
+        res.render("/transport/transport",{buses:res});
     });
 };
 
@@ -59,8 +59,8 @@ Bus.findBusById = (busId, result) => {
 
 Bus.updateBusById = (busId, bus, result) => {
     sql.query(
-        "UPDATE bus SET nom = ?,id_driver = ?,capacity = ?, minibus = ?, rent_price_per_day = ?  WHERE id = ?",
-        [bus.nom, bus.id_driver, bus.capacity, bus.minibus, bus.rent_price_per_day, busId],
+        "UPDATE bus SET nom = ?,driver_full_name = ?,capacity = ?, minibus = ?, rent_price_per_day = ?  WHERE id = ?",
+        [bus.nom, bus.driver_full_name, bus.capacity, bus.minibus, bus.rent_price_per_day, busId],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

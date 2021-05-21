@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const transport = require('../controller/driver.controller.js');
+const driver = require('../controller/driver.controller.js');
 
-router.post('/addBus', transport.createBus);
-router.get("/allBuses", transport.findAllBuses);
-router.get("/findBusById/:driverId", transport.findBusById);
+router.post('/addDriver', driver.createDriver);
+router.get("/allDrivers",driver.findAllDrivers)
+router.get("/findDriverById/:driverId", driver.findDriverById);
+router.get("/getDriverNameUsingId/:driverId", driver.getDriverNameUsingId);
+router.get("/getDriverLastNameUsingId/:driverId", driver.getDriverLastNameUsingId);
+router.get("/getDriverIdUsingNameAndLastName/:driverId", driver.getDriverIdUsingNameAndLastName);
+
 module.exports = router;

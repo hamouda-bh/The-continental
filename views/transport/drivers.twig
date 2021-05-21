@@ -41,7 +41,7 @@
     <br> <br>
     <div id="main">
     <div class="inner">
-    <h3>Bus booking and management <span class="pull-right" style="color: #148599">Displaying all the buses</span></h3>
+    <h3>Drivers booking and management for private tours<span class="pull-right" style="color: #148599">Displaying all the drivers</span></h3>
     <div class="container-fluid">
 {# <section>#}
 {#            <form id ="formulaire2" >#}
@@ -67,33 +67,34 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
             <thead id="head">
             <tr>
-                <th>Bus Name</th>
-                <th>Capacity</th>
-                <th>Driver name</th>
-                <th>$$ per days</th>
+                <th>Driver First Name</th>
+                <th>Driver Last Name</th>
+                <th>Salaire</th>
+                <th></th>
                 <th>Details</th>
             </tr>
             </thead>
-            {% if bus|length == 0 %}
-            Il n'y a aucun bus à afficher.
+            {% if driver|length == 0 %}
+            There is no drivers.
             {% else %}
 
             <tbody>
-                {% for bus in buses %}
+                {% for driver in drivers %}
             <tr>
-                <td>{{ bus.name }}</td>
-                <td>{{ bus.capacite }}</td>
-                <td>{{ bus.prix_location_jour }}</td>
-                <td> <button class="btn btn-outline-danger" onclick="deleteBusUsingId({{bus.id}})" >remove </button></td>
-                <td> <button class="btn btn-outline-primary" onclick="findBusById({{ bus.id }})">details </button></td>
+                <td>{{ driver.nom }}</td>
+                <td>{{ driver.prenom }}</td>
+                <td>{{ driver.age }}</td>
+                <td>{{ driver.date_debut_contrat }}</td>
+                <td> <button class="btn btn-outline-danger" onclick="deleteDriverUsingId({{Driver.id}})" >remove </button></td>
+                <td> <button class="btn btn-outline-primary" onclick="findDriverById({{ Driver.id }})">details </button></td>
             </tr>
                 {% endfor %}
             </tbody>
             {% endif %}
         </table></div>
         <div style="text-align: center;">
-     <td> <button class="btn btn-outline-danger" onclick="deleteAllBuses()">remove all</button></td>
-     <td> <button class="btn btn-outline-success"  onclick="addBus()"  >add bus</button></td>
+     <td> <button class="btn btn-outline-danger" onclick="deleteAllDrivers()">remove all</button></td>
+     <td> <button class="btn btn-outline-success"  onclick="addDriver()"  >add Driver</button></td>
 
 </div>
 <br><br>
@@ -148,10 +149,10 @@
 
 <script>
 
-function deleteBusUsingId (id){
+function deleteDriverUsingId (id){
 $.ajax({
 			type: 'delete',
-			url: "http://localhost:3000/transport/deleteBusUsingId/"+id,
+			url: "http://localhost:3000/transport/deleteDriverUsingId/"+id,
 			dataType: 'json',
 			async: false,
 			success: (result) => {
@@ -159,14 +160,14 @@ $.ajax({
 })
 location.reload()
 }
-function findBusById (id){
-location.href="http://localhost:3000/transport/findBusById"+id
+function findDriverById (id){
+location.href="http://localhost:3000/transport/findDriverById"+id
 }
-function deleteAllBuses(){
+function deleteAllDrivers(){
 
 $.ajax({
 			type: 'delete',
-			url: "http://localhost:3000/transport/deleteAllBuses/",
+			url: "http://localhost:3000/transport/deleteAllDrivers/",
 			dataType: 'json',
 			async: false,
 			success: (result) => {
@@ -176,8 +177,8 @@ $.ajax({
 location.href="http://localhost:3000"
 }
 
-function addBus (){
-location.href="http://localhost:3000/transport/addBus"
+function addDriver (){
+location.href="http://localhost:3000/transport/addDriver"
 }
 
 

@@ -1,3 +1,5 @@
+
+
 const sql = require("./db.js");
 
 //constructor
@@ -24,7 +26,7 @@ Driver.createDriver = (newDriver, result) => {
 };
 
 Driver.findAllDrivers = result => {
-    sql.query(`SELECT * FROM personelle WHERE fonction="chauffeur" ` ,(err,res) =>{
+    sql.query(`SELECT * FROM personelle WHERE fonction="driver" ` ,(err,res) =>{
         if(err) {
             console.log("error: ",err);
             result(err, null);
@@ -114,3 +116,5 @@ Driver.getDriverIdUsingNameAndLastName = (driverName,driverLastName, result) => 
         result({ kind: "not_found" }, null);
     });
 };
+
+module.exports = Driver;
