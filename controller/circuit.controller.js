@@ -1,4 +1,4 @@
-const Circuit = require('../models/circuit.model');
+const Circuit = require('../models/circuit.model.js');
 
 // Create and Save a new Customer
 exports.create = (req, res) => {
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
     });
 };
 exports.affiche = (req, res) => {
-    res.render('Circuit/addCircuit');
+    res.render('circuit/addCircuit');
 };
 // Retrieve all Customers from the database.
 exports.findAll = (req, res) => {
@@ -41,7 +41,7 @@ exports.findAll = (req, res) => {
                 message:
                     err.message || "Some error occurred while retrieving circuits."
             });
-        else res.render('Circuit/circuit', {circuits :rows});
+        else res.render('circuit/circuit', {circuits :rows});
     });
 };
 
