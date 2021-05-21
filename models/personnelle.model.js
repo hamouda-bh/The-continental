@@ -58,8 +58,8 @@ Personnelle.getAll = result => {
 
 Personnelle.updateById = (id, personnelle, result) => {
     sql.query(
-        "UPDATE personnelle SET nom = ?, prenom = ?, age = ? , fonction = ? , salaire = ? ,date_debut_contrat = ? , date_fin_contrat = ?  WHERE id = ?"
-        [personnelle.nom, personnelle.prenom, personnelle.age,personnelle.fonction,personnelle.salaire,personnelle.date_debut_contrat,personnelle.date_fin_contrat, id],
+        "UPDATE personnelle SET nom = ?, prenom = ?, age = ? , fonction = ? , salaire = ?   WHERE id = ?",
+        [personnelle.nom, personnelle.prenom, personnelle.age,personnelle.fonction,personnelle.salaire, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

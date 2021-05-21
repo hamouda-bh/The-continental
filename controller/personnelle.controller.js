@@ -73,10 +73,7 @@ exports.update = (req, res) => {
         });
     }
 
-    Personnelle.updateById(
-        req.params.personnelleId,
-        new Personnelle(req.body),
-        (err, data) => {
+    Personnelle.updateById(req.params.personnelleId, new Personnelle(req.body), (err, data) => {
             if (err) {
                 if (err.kind === "not_found") {
                     res.status(404).send({
