@@ -54,7 +54,7 @@
     </nav>
     <div id="main">
     <div class="inner">
-    <h3>STAFF MANAGEMENT <span class="pull-right" style="color: #148599">Display of all staff</span></h3>
+    <h3>Staff Mangement <span class="pull-right" style="color: #148599">Display of all the staff </span></h3>
 
     <div class="container-fluid">
 
@@ -67,9 +67,9 @@
                 <th>Age</th>
                 <th>Fonction</th>
                 <th>Salary</th>
-                <th>contract start date</th>
-                <th>contract end date</th>
-                <th>Deletion</th>
+                <th>Contract start date</th>
+                <th>Contract end date</th>
+                <th>Delection</th>
                 <th>Modification</th>
             </tr>
             </thead>
@@ -94,8 +94,8 @@
             {% endif %}
         </table></div>
         <div style="text-align: center;">
-     <td> <button class="btn btn-outline-danger" onclick="deleteall()">remove all</button></td>
-     <td> <button class="btn btn-outline-success"  onclick="addPersonnelle()"  >add personnelle</button></td>
+     <td> <button class="btn btn-outline-danger" onclick="deleteall()">Remove all</button></td>
+     <td> <button class="btn btn-outline-success"  onclick="addPersonnelle()"  >Add Staff</button></td>
 
 </div>
 <br><br>
@@ -167,17 +167,17 @@ location.href="http://localhost:3000/personnelle/form"
 }
 
 
- $('#formulaire1').on("submit",function (e){
+ /*$('#formulaire1').on("submit",function (e){
     e.preventDefault()
     location.href="http://localhost:3000/hotel/promo/"+$('#nom').val()+"/"+$('#date').val()
-  })
+  })*/
 
- $('#formulaire2').on("submit",function (e){
+/* $('#formulaire2').on("submit",function (e){
      e.preventDefault()
 
      location.href="http://localhost:3000/personnelle/onePersonnel/"+$('#personnelleId').val()
 
-  })
+  })*/
   $(document).ready(function () {
     $('#tab').DataTable();
 });
