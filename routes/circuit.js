@@ -1,22 +1,22 @@
 const express = require('express');
 const router = express.Router();
-//const Circuit = require("../controllers/circuit.controller.js");
-const Circuit = require('../controller/circuit.controller');
+
+    const Circuit = require("../controller/circuit.controller.js");
 
     // Create a new Customer
-    router.post("/circuits", Circuit.create);
-
+    router.post("/add", Circuit.create);
+    router.get("/form", Circuit.affiche);
     // Retrieve all Customers
-router.get("/circuits", Circuit.findAll);
+router.get("/all", Circuit.findAll);
 
     // Retrieve a single Customer with customerId
-router.get("/circuits/:circuitId", Circuit.findOne);
+router.get("/findone/:circuitId", Circuit.findOne);
 
     // Update a Customer with customerId
-//router.put("/circuits/:circuitId", Circuit.update);
+router.put("/updateone/:circuitId", Circuit.update);
 
     // Delete a Customer with customerId
-router.delete("/circuits/:circuitId", Circuit.delete);
+router.delete("/deleteone/:circuitId", Circuit.delete);
 
     // Create a new Customer
 router.delete("/circuits", Circuit.deleteAll);
