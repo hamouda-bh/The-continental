@@ -17,7 +17,7 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="fichiersHtml/index.html" class="logo">
+            <a href="http://localhost:3000" class="logo">
                 <span class="fa fa-plane"></span> <span class="title">The continental</span>
             </a>
 
@@ -35,27 +35,23 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="fichiersHtml/index.html">Home</a></li>
+            <li><a href="http://localhost:3000">Home</a></li>
 
                 <li><a href="http://localhost:3000/voyages/all" class="active">Trips management</a></li>
 
                 <li><a href="http://localhost:3000/hotel/all">Hotel management</a></li>
 
-            <li>
-                <a href="#" class="dropdown-toggle">About</a>
 
-                <ul>
-                    <li><a href="fichiersHtml/about.html">About Us</a></li>
-                    <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
-                    <li><a href="fichiersHtml/terms.html">Terms</a></li>
-                </ul>
-            </li>
-            <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
+                    <li><a href="http://localhost:3000/personnelle/all">Staff management</a></li>
+                    <li><a href="fichiersHtml/testimonials.html">Transport management</a></li>
+                    <li><a href="fichiersHtml/terms.html">Reservations management</a></li>
+
+            <li><a href="fichiersHtml/contact.html">Circuit management</a></li>
         </ul>
     </nav>
     <div id="main">
     <div class="inner">
-    <h3>Trips management <span class="pull-right" style="color: #f2849e">DISPLAY OF ALL TRIP</span></h3>
+    <h3>Trips management <span class="pull-right" style="color: #148599">DISPLAY OF ALL TRIP</span></h3>
 
     <div class="container-fluid">
  <section>
@@ -87,12 +83,13 @@
                 <th>Governorate</th>
                 <th>Start date</th>
                 <th>End date</th>
+                <th>Delete</th>
+                <th>Edit</th>
             </tr>
             </thead>
             {% if trips|length == 0 %}
             Il n'y a aucun voyage à afficher.
             {% else %}
-
             <tbody>
                 {% for voyages in trips %}
             <tr>
@@ -101,7 +98,7 @@
                 <td>{{ voyages.gouvernorat }}</td>
                 <td>{{ voyages.date_debut|date("m/d/Y")}}</td>
                 <td>{{ voyages.date_fin|date("m/d/Y") }}</td>
-                <td> <button class="btns" onclick="deleteOne({{voyages.id}})" >remove </button></td>
+                <td> <button class="btnDelete" onclick="deleteOne({{voyages.id}})" >X </button></td>
                 <td> <button class="btns" onclick="findOne({{ voyages.id }})" >edit </button></td>
             </tr>
                 {% endfor %}
@@ -109,8 +106,8 @@
             {% endif %}
         </table></div>
         <div style="text-align: center;">
- <td> <button class="btns" onclick="deleteall()">remove all</button></td>
-     <td> <button class="btns"  onclick="addVoyage()"  >add trip</button></td>
+ <td> <button class="btn btn-outline-danger" onclick="deleteall()">Delete all</button></td>
+     <td> <button class="btn btn-outline-success"  onclick="addVoyage()"  >add trip</button></td>
 
 </div>
 <br><br>

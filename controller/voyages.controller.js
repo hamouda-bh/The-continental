@@ -9,7 +9,6 @@ exports.create = (req, res) => {
     }
 
     const voyages = new Voyages({
-        id_reservation: req.body.id_reservation,
         pays: req.body.pays,
         prix: req.body.prix,
         gouvernorat: req.body.gouvernorat,
@@ -188,10 +187,7 @@ exports.update = (req, res) => {
         });
     }
 
-    Voyages.updateById(
-
-        new Voyages(req.body),
-        (err, data) => {
+        Voyages.updateById(req.params.voyagesId,  new Voyages(req.body),  (err, data) => {
             if (err) {
                 if (err.kind === "not_found") {
                     res.status(404).send({
