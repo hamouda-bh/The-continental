@@ -9,7 +9,6 @@ exports.create = (req, res) => {
     }
 
     const voyages = new Voyages({
-        id_reservation: req.body.id_reservation,
         pays: req.body.pays,
         prix: req.body.prix,
         gouvernorat: req.body.gouvernorat,
@@ -81,7 +80,7 @@ exports.findOne = (req, res) => {
                     message: "Error retrieving voyage with id " + req.params.voyageId
                 });
             }
-        } else res.render('voyages/voyage', {voyages :data});
+        } else res.render('voyages/editVoyage', {voyages :data});
     });
 };
 
@@ -174,7 +173,32 @@ exports.findCountry = (req, res) => {
                     err.message || "Some error occurred while retrieving voyages."
             });
         else {res.render('voyages/byCountry', {country :rows});
-
+            console.log(res);
         }
+        console.log(res);
     });
+};
+
+
+exports.update = (req, res) => {
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+        Voyages.updateById(req.params.voyagesId,  new Voyages(req.body),  (err, data) => {
+            if (err) {
+                if (err.kind === "not_found") {
+                    res.status(404).send({
+                        message: `Not found trip with id ${req.params.voyagesId}.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Error updating trip with id " + req.params.voyagesId
+                    });
+                }
+            } else res.send(data);
+        },req.params.voyagesId
+    );
 };

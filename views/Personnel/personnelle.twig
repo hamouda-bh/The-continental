@@ -1,0 +1,187 @@
+{% extends 'layout.twig' %}
+
+  {% block stylesheets %}
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
+      <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
+  {% endblock %}
+
+{% block body %}
+
+    <div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+
+            <!-- Logo -->
+            <a href="fichiersHtml/index.html" class="logo">
+                <span class="fa fa-plane"></span> <span class="title">The continental</span>
+            </a>
+
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="fichiersHtml/index.html">Home</a></li>
+
+            <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
+
+            <li><a href="fichiersHtml/blog.html">Blog</a></li>
+
+            <li>
+                <a href="#" class="dropdown-toggle">About</a>
+
+                <ul>
+                    <li><a href="fichiersHtml/about.html">About Us</a></li>
+                    <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
+                    <li><a href="fichiersHtml/terms.html">Terms</a></li>
+                </ul>
+            </li>
+            <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+    <div id="main">
+    <div class="inner">
+    <h3>Staff Mangement <span class="pull-right" style="color: #148599">Display of all the staff </span></h3>
+
+    <div class="container-fluid">
+
+    <div class="table-responsive">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Fonction</th>
+                <th>Salary</th>
+                <th>Contract start date</th>
+                <th>Contract end date</th>
+                <th>Delection</th>
+                <th>Modification</th>
+            </tr>
+            </thead>
+            {% if personnelles|length == 0 %}
+            Il n'y a aucun personnel à afficher.
+            {% else %}
+             <tbody>
+                {% for personnelle in personnelles %}
+            <tr>
+                <td>{{ personnelle.nom }}</td>
+                <td>{{ personnelle.prenom }}</td>
+                <td>{{ personnelle.age }}</td>
+                <td>{{ personnelle.fonction }}</td>
+                <td>{{ personnelle.salaire }}</td>
+                <td>{{ personnelle.date_debut_contrat }}</td>
+                <td>{{ personnelle.date_fin_contrat }}</td>
+                 <td> <button class="btn btn-outline-danger" onclick="deleteOne({{personnelle.id}})" >Remove </button></td>
+                 <td> <button class="btn btn-outline-primary" onclick="findOne({{ personnelle.id }})">Edit </button></td>
+            </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table></div>
+        <div style="text-align: center;">
+     <td> <button class="btn btn-outline-danger" onclick="deleteall()">Remove all</button></td>
+     <td> <button class="btn btn-outline-success"  onclick="addPersonnelle()"  >Add Staff</button></td>
+
+</div>
+<br><br>
+
+<br>
+
+        <div style="text-align: center;">
+
+<br>
+<br>
+<br>
+
+</div></div></div>
+
+
+
+
+
+
+
+
+
+
+
+ {% endblock %}
+  {% block javascriptsAtTheEnd %}
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/jquery.scrolly.min.js"></script>
+    <script src="/javascripts/jquery.scrollex.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+    <script type="text/javascript" src='/javascripts/jquery.js'></script>
+    <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>
+
+
+<script>
+
+function deleteOne (id){
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/personnelle/deleteOne/"+id,
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+})
+location.reload()
+}
+function findOne (id){
+location.href="http://localhost:3000/personnelle/findOne/"+id
+}
+
+function deleteall(){
+
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/personnelle/deleteAll",
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+    })
+
+location.href="http://localhost:3000"
+}
+
+function addPersonnelle (){
+location.href="http://localhost:3000/personnelle/form"
+}
+
+
+ /*$('#formulaire1').on("submit",function (e){
+    e.preventDefault()
+    location.href="http://localhost:3000/hotel/promo/"+$('#nom').val()+"/"+$('#date').val()
+  })*/
+
+/* $('#formulaire2').on("submit",function (e){
+     e.preventDefault()
+
+     location.href="http://localhost:3000/personnelle/onePersonnel/"+$('#personnelleId').val()
+
+  })*/
+  $(document).ready(function () {
+    $('#tab').DataTable();
+});
+</script>
+
+
+{% endblock %}

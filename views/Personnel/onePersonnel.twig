@@ -7,28 +7,41 @@
   {% endblock %}
 
 {% block body %}
+
     <div id="wrapper">
+
+    <!-- Header -->
     <header id="header">
         <div class="inner">
+
+            <!-- Logo -->
             <a href="fichiersHtml/index.html" class="logo">
                 <span class="fa fa-plane"></span> <span class="title">The continental</span>
             </a>
+
+            <!-- Nav -->
             <nav>
                 <ul>
                     <li><a href="#menu">Menu</a></li>
                 </ul>
             </nav>
+
         </div>
     </header>
 
+    <!-- Menu -->
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
             <li><a href="fichiersHtml/index.html">Home</a></li>
+
             <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
+
             <li><a href="fichiersHtml/blog.html">Blog</a></li>
+
             <li>
                 <a href="#" class="dropdown-toggle">About</a>
+
                 <ul>
                     <li><a href="fichiersHtml/about.html">About Us</a></li>
                     <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
@@ -38,13 +51,12 @@
             <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
         </ul>
     </nav>
-<br>
     <div id="main">
     <div class="inner">
-    <h3>Detail de l'hotel </h3>
+    <h3>Detail du personnel</h3>
 
-    <div class="container-fluid" id="pics">
-        <div class="col-md-7">
+    <div class="container-fluid">
+        <div class="col-lg-9">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -55,16 +67,16 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="/images/product-2-720x480.jpg" alt="First slide">
+                        <img class="d-block w-100" src="/images/product-1-720x480.jpg" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="/images/product-4-720x480.jpg" alt="Second slide">
+                        <img class="d-block w-100" src="/images/product-2-720x480.jpg" alt="Second slide">
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" src="/images/product-3-720x480.jpg" alt="Third slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="/images/product-1-720x480.jpg" alt="Fourth slide">
+                        <img class="d-block w-100" src="/images/product-4-720x480.jpg" alt="Fourth slide">
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" src="/images/product-5-720x480.jpg" alt="Fifth slide">
@@ -79,90 +91,99 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+        </div>
         <br><br>
-    </div>
 
     <div class="table-responsive">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
-            <thead  id="head">
+             <thead  id="head">
             <tr>
-                <th>Nom Bus</th>
-                <th>Driver_id</th>
-                <th>Capacity</th>
-                <th>Minibus</th>
-                <th>$$ per days</th>
-                <th>Suppression</th>
-                <th>enregistrer</th>
+                <th>Fist Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Fonction</th>
+                <th>Salary</th>
+                <th>Contract start date</th>
+                <th>Contract end date</th>
             </tr>
             </thead>
-            {% if bus|length == 0 %}
-            Il n'y a aucun bus à afficher.
+            {% if personnels|length == 0 %}
+            Il n'y a aucun personnel à afficher.
             {% else %}
+
             <tbody>
+
             <tr>
-                <td><p id="name">{{ bus.name }}</p></td>
-                <td><p id="gouvernorat">{{ bus.id_chauffeur }}</p></td>
-                <td> <input type="text" id="nombreS" value="{{ bus.capacity }}"/></td>
-                <td> <input type="text" id="nombreD" value="{{ bus.nbr_chambre_double }}"/></td>
-                <td><input type="text" id="nombreT" value="{{ bus.nbr_chambre_triple }}"/></td>
-                <td><input type="text" id="prixS" value="{{ bus.prix_nuit_single }}"/></td>
-                <td><input type="text" id="prixD" value="{{ hotel.prix_nuit_double }}"/></td>
-                <td><input type="text" id="prixT" value="{{ hotel.prix_nuit_triple }}"/></td>
-                <td> <button class="btn btn-outline-danger" id="btH" onclick="deleteOne({{hotel.id}})">supprimer</button></td>
-                <td> <button class="btn btn-outline-primary" id="btH" onclick="updateOne({{hotel.id}})">enregistrer</button></td>
+                                    <td> <input type="text" id="nom" value="{{ personnels.nom }}"/></td>
+                                    <td> <input type="text" id="prenom" value="{{ personnels.prenom }}"/></td>
+                                    <td><input type="text" id="age" value="{{ personnels.age }}"/></td>
+                                    <td><input type="text" id="fonction" value="{{ personnels.fonction }}"/></td>
+                                    <td><input type="text" id="salaire" value="{{ personnels.salaire }}"/></td>
+                <td><p id="dateDebutContrat">{{ personnels.date_debut_contrat}}</p></td>
+                <td><p id="dateFinContrat">{{ personnels.date_fin_contrat }}</p></td>
+                                     <td> <button class="btn btn-outline-danger" onclick="deleteOne({{personnels.id}})">Remove</button></td>
+                                    <td> <button class="btn btn-outline-primary" onclick="updateOne({{personnels.id}})">Save</button></td>
             </tr>
+
             </tbody>
             {% endif %}
         </table>
     </div>
-    <br>
-        </div>
-        </div>
+
+        <br>
+
+
     </div>
     </div>
+    </div>
+    </div>
+
+
 
  {% endblock %}
-
   {% block javascriptsAtTheEnd %}
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/javascripts/jquery.scrolly.min.js"></script>
     <script src="/javascripts/jquery.scrollex.min.js"></script>
     <script src="/javascripts/main.js"></script>
+    <script type="text/javascript" src='/javascripts/jquery.js'></script>
+    <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>
 
 <script>
-    function deleteOne (id){
-        $.ajax({
-            type: 'delete',
-            url: "http://localhost:3000/hotel/deleteOne/"+id,
-            dataType: 'json',
-            async: false,
-            success: (result) => {
-            }
-        })
-        location.href="http://localhost:3000/hotel/all"
-    }
 
-    function updateOne(id){
-        $.ajax({
-            type: 'put',
-            url: "http://localhost:3000/hotel/updateHotel/"+id,
-            data:{
-                nbr_chambre_single: $('#nombreS').val(),
-                nbr_chambre_double: $('#nombreD').val(),
-                nbr_chambre_triple: $('#nombreT').val(),
-                prix_nuit_single: $('#prixS').val(),
-                prix_nuit_double: $('#prixD').val(),
-                prix_nuit_triple: $('#prixT').val()
-            },
-            dataType: 'json',
-            async: false,
-            success: (result) => {
-              //  location.href="http://localhost:3000/hotel/findOne/"+id
-            }
-        })
-        location.reload()
-    }
+function deleteOne (id){
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/personnelle/deleteOne/"+id,
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+})
+    location.href="http://localhost:3000/personnelle/all"
 
-</script>
-{% endblock %}
+}
+  function updateOne(id){
+              $.ajax({
+                  type: 'put',
+                  url: "http://localhost:3000/personnelle/updatePersonnelle/"+id,
+                  data:{
+                      nom: $('#nom').val(),
+                      prenom: $('#prenom').val(),
+                     age: $('#age').val(),
+                      fonction: $('#fonction').val(),
+                      salaire: $('#salaire').val()
+                  },
+                  dataType: 'json',
+                  async: false,
+                  success: (result) => {
+                      // location.href="http://localhost:3000/personnelle/findOne/"+id
+                  }
+              })
+              location.reload()
+
+          }
+
+
+</script>{% endblock %}

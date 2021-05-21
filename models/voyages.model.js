@@ -2,7 +2,6 @@ const sql = require("./db.js");
 
 // constructor
 const Voyages = function(voyages) {
-    this.id_reservation = voyages.id_reservation;
     this.pays = voyages.pays ;
     this.prix = voyages.prix ;
     this.gouvernorat = voyages.gouvernorat;
@@ -145,7 +144,7 @@ Voyages.removeId = (id, result) => {
         }
 
         if (res.affectedRows == 0) {
-            // not found Customer with the id
+            // not found bus with the id
             result({ kind: "not_found" }, null);
             return;
         }
@@ -182,6 +181,26 @@ Voyages.getCountry = result => {
     });
 };
 
+Voyages.updateById = (id, voyages, result) => {
+    sql.query(
+        "UPDATE voyages SET pays = ?, prix = ? ,gouvernorat = ?,date_debut = ?,date_fin = ? WHERE id = ?",
+        [ voyages.pays,voyages.prix,voyages.gouvernorat,voyages.date_debut,voyages.date_fin, id],
+        (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+
+            if (res.affectedRows == 0) {
+                result({ kind: "not_found" }, null);
+                return;
+            }
+            console.log("updated voyage: ", { id: id, ...voyages });
+            result(null, { id: id, ...voyages });
+        }
+    );
+};
 
 
 
