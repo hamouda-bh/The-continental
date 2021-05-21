@@ -1,24 +1,24 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-    const Circuits = require("../controllers/circuit.controller.js");
+    const Circuit = require("../controller/circuit.controller.js");
 
     // Create a new Customer
-    router.post("/circuits", Circuits.create);
-
+    router.post("/add", Circuit.create);
+    router.get("/form", Circuit.affiche);
     // Retrieve all Customers
-router.get("/circuits", Circuits.findAll);
+router.get("/all", Circuit.findAll);
 
     // Retrieve a single Customer with customerId
-router.get("/circuits/:circuitId", Circuits.findOne);
+router.get("/findone/:circuitId", Circuit.findOne);
 
     // Update a Customer with customerId
-router.put("/circuits/:circuitId", Circuits.update);
+router.put("/updateone/:circuitId", Circuit.update);
 
     // Delete a Customer with customerId
-router.delete("/circuits/:circuitId", Circuits.delete);
+router.delete("/deleteone/:circuitId", Circuit.delete);
 
     // Create a new Customer
-router.delete("/circuits", Circuits.deleteAll);
+router.delete("/circuits", Circuit.deleteAll);
 
 module.exports = router;
