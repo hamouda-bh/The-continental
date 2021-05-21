@@ -1,7 +1,7 @@
 {% extends 'layout.twig' %}
 
   {% block stylesheets %}
-     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="/stylesheets/main.css" />
       <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
       <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
@@ -54,47 +54,70 @@
     </nav>
     <div id="main">
     <div class="inner">
-    <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Affichage des hotels dans ce gouvernorat</span></h3>
+    <h3>Staff Mangement <span class="pull-right" style="color: #148599">Display of all the staff </span></h3>
 
     <div class="container-fluid">
 
     <div class="table-responsive">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab" class="table">
-            <thead  id="head">
+            <thead>
             <tr>
-                <th>Nom hotel</th>
-                <th>Gouvernorat</th>
-                <th>prix des chambres single</th>
-                <th>prix des chambres double</th>
-                <th>prix des chambres triple</th>
-                <th>Suppression</th>
-                <th>Details</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Fonction</th>
+                <th>Salary</th>
+                <th>Contract start date</th>
+                <th>Contract end date</th>
+                <th>Delection</th>
+                <th>Modification</th>
             </tr>
             </thead>
-            {% if hotels|length == 0 %}
-            Il n'y a aucun hotel à afficher.
+            {% if personnelles|length == 0 %}
+            Il n'y a aucun personnel à afficher.
             {% else %}
-            <tbody>
-                {% for hotel in hotels %}
+             <tbody>
+                {% for personnelle in personnelles %}
             <tr>
-                <td>{{ hotel.name }}</td>
-                <td>{{ hotel.gouvernorat }}</td>
-                <td>{{ hotel.prix_nuit_single }}</td>
-                <td>{{ hotel.prix_nuit_double }}</td>
-                <td>{{ hotel.prix_nuit_triple }}</td>
-              <td> <button class="btn btn-outline-danger" onclick="deleteOne({{hotel.id}})" >remove </button></td>
-              <td> <button class="btn btn-outline-primary" onclick="findOne({{ hotel.id }})">details </button></td>
+                <td>{{ personnelle.nom }}</td>
+                <td>{{ personnelle.prenom }}</td>
+                <td>{{ personnelle.age }}</td>
+                <td>{{ personnelle.fonction }}</td>
+                <td>{{ personnelle.salaire }}</td>
+                <td>{{ personnelle.date_debut_contrat }}</td>
+                <td>{{ personnelle.date_fin_contrat }}</td>
+                 <td> <button class="btn btn-outline-danger" onclick="deleteOne({{personnelle.id}})" >Remove </button></td>
+                 <td> <button class="btn btn-outline-primary" onclick="findOne({{ personnelle.id }})">Edit </button></td>
             </tr>
                 {% endfor %}
             </tbody>
             {% endif %}
-        </table>
+        </table></div>
         <div style="text-align: center;">
-     <td> <button class="btn btn-outline-danger" onclick="deleteall()">remove all</button></td>
+     <td> <button class="btn btn-outline-danger" onclick="deleteall()">Remove all</button></td>
+     <td> <button class="btn btn-outline-success"  onclick="addPersonnelle()"  >Add Staff</button></td>
 
 </div>
-</div>
-    <br>
+<br><br>
+
+<br>
+
+        <div style="text-align: center;">
+
+<br>
+<br>
+<br>
+
+</div></div></div>
+
+
+
+
+
+
+
+
+
 
 
  {% endblock %}
@@ -107,12 +130,13 @@
     <script type="text/javascript" src='/javascripts/jquery.js'></script>
     <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>
 
+
 <script>
 
 function deleteOne (id){
 $.ajax({
 			type: 'delete',
-			url: "http://localhost:3000/hotel/deleteOne/"+id,
+			url: "http://localhost:3000/personnelle/deleteOne/"+id,
 			dataType: 'json',
 			async: false,
 			success: (result) => {
@@ -121,13 +145,43 @@ $.ajax({
 location.reload()
 }
 function findOne (id){
-location.href="http://localhost:3000/hotel/findOne/"+id
+location.href="http://localhost:3000/personnelle/findOne/"+id
 }
-function deleteall (){
-location.href="http://localhost:3000/hotel/deleteAll"
+
+function deleteall(){
+
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/personnelle/deleteAll",
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+    })
+
+location.href="http://localhost:3000"
 }
-$(document).ready(function () {
+
+function addPersonnelle (){
+location.href="http://localhost:3000/personnelle/form"
+}
+
+
+ /*$('#formulaire1').on("submit",function (e){
+    e.preventDefault()
+    location.href="http://localhost:3000/hotel/promo/"+$('#nom').val()+"/"+$('#date').val()
+  })*/
+
+/* $('#formulaire2').on("submit",function (e){
+     e.preventDefault()
+
+     location.href="http://localhost:3000/personnelle/onePersonnel/"+$('#personnelleId').val()
+
+  })*/
+  $(document).ready(function () {
     $('#tab').DataTable();
 });
 </script>
+
+
 {% endblock %}

@@ -1,0 +1,176 @@
+{% extends 'layout.twig' %}
+
+  {% block stylesheets %}
+      <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.dataTables.min.css">
+      <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  {% endblock %}
+
+{% block body %}
+
+    <div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+
+            <!-- Logo -->
+            <a href="http://localhost:3000" class="logo">
+                <span class="fa fa-plane"></span> <span class="title">The continental</span>
+            </a>
+
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+                     <li><a href="http://localhost:3000/">Home</a></li>
+
+                <li><a href="http://localhost:3000/voyages/all" class="active">Trips management</a></li>
+
+                <li><a href="http://localhost:3000/hotel/all">Hotel management</a></li>
+
+
+                    <li><a href="http://localhost:3000/personnelle/all">Staff management</a></li>
+                    <li><a href="fichiersHtml/testimonials.html">Transport management</a></li>
+                    <li><a href="fichiersHtml/terms.html">Reservations management</a></li>
+
+            <li><a href="fichiersHtml/contact.html">Circuit management</a></li>
+        </ul>
+    </nav>
+    <div id="main">
+    <div class="inner">
+    <h3>Trip Edit <span class="pull-right" style="color: #148599">DISPLAY OF TRIPS </span></h3>
+
+    <div class="container-fluid">
+ <section>
+            <form id ="formulaire2" >
+				<div class="fields">
+				                    <div class="field half">
+                    <a href="http://localhost:3000/voyages/all">Show all</a>
+                    </div>
+                    <div class="field quarter">
+                        <!--                 <SELECT name="pays" id="pays" size="1">
+            {% if country|length == 0 %}
+            Il n'y a aucun pays à afficher.
+            {% else %}
+                        {% for pays in country %}
+                             <OPTION>{{ p }}
+                        {% endfor %}
+                  {% endif %}
+                        </SELECT> -->
+
+
+                    </div>
+
+                </div>
+            </form>
+        </section>
+        <form id="formulaire">
+                        <div class="fields">
+
+                            <div class="field half">
+                                <input type="text" name="pays" id="pays" value="{{ voyages.pays }}" />
+                            </div>
+
+                            <div class="field quarter">
+                                <input type="text" name="prix" id="prix" value="{{ voyages.prix }}" />
+                            </div>
+
+                            <div class="field half">
+                                <input type="text" name="gouvernorat" id="gouvernorat" value="{{ voyages.gouvernorat }}" />
+                            </div>
+
+                            <div class="field half">
+
+                                <label>Start date :</label>
+                                <input type="date" name="date_debut" id="date_debut" value="{{ voyages.date_debut|date("Y-m-d")}}" />
+                            </div>
+
+                            <div class="field quarter">
+                                <label>End date :</label>
+                                <input type="date" name="date_fin" id="date_fin" value="{{ voyages.date_fin|date("Y-m-d") }}" />
+                            </div>
+                        </div>
+                        </form>
+        <div style="text-align: center;">
+     <td> <button class="btn btn-outline-primary"  onclick="editVoyage({{voyages.id}})"  >Save</button></td>
+
+</div>
+<br><br>
+
+
+
+<br>
+<br>
+<br>
+
+</div></div></div>
+
+
+ {% endblock %}
+  {% block javascriptsAtTheEnd %}
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/jquery.scrolly.min.js"></script>
+    <script src="/javascripts/jquery.scrollex.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+    <script type="text/javascript" src='/javascripts/jquery.js'></script>
+    <script type="text/javascript" src="/javascripts/jquery.dataTables.min.js"></script>
+
+
+<script>
+
+function deleteOne (id){
+$.ajax({
+			type: 'delete',
+			url: "http://localhost:3000/voyages/deleteOne/"+id,
+			dataType: 'json',
+			async: false,
+			success: (result) => {
+			}
+})
+location.reload()
+}
+
+
+function editVoyage(id){
+
+if ($('#date_debut').val() <= $('#date_fin').val())
+              {
+        $.ajax({
+          type: 'put',
+          url: "http://localhost:3000/voyages/updateId/"+id,
+           data:{
+                          pays: $('#pays').val(),
+                          prix: $('#prix').val(),
+                          gouvernorat: $('#gouvernorat').val(),
+                          date_debut: $('#date_debut').val(),
+                          date_fin: $('#date_fin').val()
+          },
+          dataType: 'json',
+          async: false,
+          success:  function(data) {
+alert('Updated !'); }
+      })
+           location.href = "http://localhost:3000/voyages/all"; }
+else alert("start date must be before End date'");
+}
+
+
+
+</script>
+
+
+{% endblock %}

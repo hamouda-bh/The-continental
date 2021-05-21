@@ -26,7 +26,13 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+header{
+	background-color: rgba(180, 191, 193, 0.19);
+}
 
+#head{
+	background-color: rgba(180, 191, 193, 0.19);
+}
 ol, ul {
 	list-style: none;
 }
@@ -2426,6 +2432,31 @@ input, select, textarea {
 
 /* Button */
 
+
+
+.btns{
+
+	font-size: 0.5em;
+	font-weight: 400;
+
+}
+.btns:hover{
+	background-color: #f2849e;
+	color:#454545;
+}
+.btnDelete{
+	border-radius: 50%;
+	font-size: 0.5em;
+	font-weight: 400;
+
+}
+.btnDelete:hover{
+	background-color: #ff4f4f;
+	color:#454545;
+}
+
+
+
 	input[type="submit"],
 	input[type="reset"],
 	input[type="button"],
@@ -3137,6 +3168,8 @@ input, select, textarea {
 
 	#main {
 		padding: 0em 0 6em 0 ;
+		/*background-color: #e8e8e8;*/
+
 	}
 
 		@media screen and (max-width: 736px) {

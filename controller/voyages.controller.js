@@ -9,7 +9,6 @@ exports.create = (req, res) => {
     }
 
     const voyages = new Voyages({
-        id_reservation: req.body.id_reservation,
         pays: req.body.pays,
         prix: req.body.prix,
         gouvernorat: req.body.gouvernorat,
@@ -31,15 +30,41 @@ exports.create = (req, res) => {
         else res.send(data);
     });
 };
+exports.affiche = (req, res) => {
+    res.render('voyages/addVoyage');
+};
+
+exports.findByCountry = (req, res) => {
+    Voyages.findByC(req.params.pays, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found trip with country ${req.params.gouvernorat}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving trip with country " + req.params.gouvernorat
+                });
+            }
+        }   else res.render('voyages/byCountry', {trips :data});
+
+    });
+};
+
+
+
+
 
 exports.findAll = (req, res) => {
-    Voyages.getAll((err, data) => {
+    Voyages.getAll((err, rows) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving voyages."
             });
-        else res.send(data);
+        else {res.render('voyages/voyage', {trips :rows});
+
+        }
     });
 };
 
@@ -55,7 +80,7 @@ exports.findOne = (req, res) => {
                     message: "Error retrieving voyage with id " + req.params.voyageId
                 });
             }
-        } else res.send(data);
+        } else res.render('voyages/editVoyage', {voyages :data});
     });
 };
 
@@ -125,7 +150,7 @@ exports.delete = (req, res) => {
                     message: "Could not delete voyages with id " + req.params.voyageId
                 });
             }
-        } else res.send({ message: `voyages was deleted successfully!` });
+        } else res.render('voyages/voyage', {voyages :data});
     });
 };
 
@@ -138,4 +163,42 @@ exports.deleteAll = (req, res) => {
             });
         else res.send({ message: `All voyages were deleted successfully!` });
     });
+};
+
+exports.findCountry = (req, res) => {
+    Voyages.getCountry((err, rows) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving voyages."
+            });
+        else {res.render('voyages/byCountry', {country :rows});
+            console.log(res);
+        }
+        console.log(res);
+    });
+};
+
+
+exports.update = (req, res) => {
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+        Voyages.updateById(req.params.voyagesId,  new Voyages(req.body),  (err, data) => {
+            if (err) {
+                if (err.kind === "not_found") {
+                    res.status(404).send({
+                        message: `Not found trip with id ${req.params.voyagesId}.`
+                    });
+                } else {
+                    res.status(500).send({
+                        message: "Error updating trip with id " + req.params.voyagesId
+                    });
+                }
+            } else res.send(data);
+        },req.params.voyagesId
+    );
 };

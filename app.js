@@ -5,10 +5,20 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
  require('./models/db.js');
  require('./models/hotel.model.js');
+ require('./models/personnelle.model.js');
+ require('./models/bus.model.js');
+var logger = require('morgan');
+ require('./models/db.js');
+ require('./models/hotel.model.js');
  require('./models/circuit.model.js');
 var indexRouter = require('./routes/index');
 var hotelRouter = require('./routes/hotel');
+var voyagesRouter = require('./routes/voyages');
 var usersRouter = require('./routes/users');
+var personnelleRouter = require ('./routes/personnelle');
+var busRouter = require ('./routes/bus');
+
+var logger = require('morgan');
 var circuitRouter = require('./routes/circuit');
 var logger = require('morgan');
 var app = express();
@@ -25,8 +35,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/hotel', hotelRouter);
+app.use('/voyages', voyagesRouter);
 app.use('/users', usersRouter);
 app.use('/circuit',circuitRouter);
+app.use('/personnelle',personnelleRouter);
+app.use('/transport',busRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
