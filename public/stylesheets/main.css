@@ -65,6 +65,16 @@ input::-moz-focus-inner {
 	padding: 0;
 }
 
+#inner
+{
+	background-color: #ffffff;
+}
+
+#btH{
+	font-size: 12px;
+	font-weight: 0.2;
+}
+
 input, select, textarea {
 	-moz-appearance: none;
 	-webkit-appearance: none;

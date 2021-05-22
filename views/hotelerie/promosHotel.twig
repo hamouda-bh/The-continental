@@ -1,64 +1,57 @@
 {% extends 'layout.twig' %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/stylesheets/main.css" />
     <noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
 {% endblock %}
 
-
-
-
 {% block body %}
 
     <div id="wrapper">
+     <header id="header">
+       <div class="inner">
 
-    <!-- Header -->
-    <header id="header">
-        <div class="inner">
+         <!-- Logo -->
+         <a href="http://localhost:3000/" class="logo">
+           <span class="fa fa-plane"></span> <span class="title">The continental</span>
+         </a>
 
-            <!-- Logo -->
-            <a href="fichiersHtml/index.html" class="logo">
-                <span class="fa fa-plane"></span> <span class="title">The continental</span>
-            </a>
+         <!-- Nav -->
+         <nav>
+           <ul>
+             <li><a href="#menu">Menu</a></li>
+           </ul>
+         </nav>
 
-            <!-- Nav -->
-            <nav>
-                <ul>
-                    <li><a href="#menu">Menu</a></li>
-                </ul>
-            </nav>
+       </div>
+     </header>
 
-        </div>
-    </header>
+     <!-- Menu -->
+     <nav id="menu">
+       <h2>Menu</h2>
+       <ul>
+         <li><a href="http://localhost:3000/" class="active">Home</a></li>
 
-    <!-- Menu -->
-    <nav id="menu">
-        <h2>Menu</h2>
-        <ul>
-            <li><a href="fichiersHtml/index.html">Home</a></li>
+         <li><a href="http://localhost:3000/voyages/all" >Trips management</a></li>
 
-            <li><a href="fichiersHtml/packages.html" class="active">Packages</a></li>
+         <li><a href="http://localhost:3000/hotel/all">Hotel management</a></li>
 
-            <li><a href="fichiersHtml/blog.html">Blog</a></li>
 
-            <li>
-                <a href="#" class="dropdown-toggle">About</a>
+         <li><a href="http://localhost:3000/personnelle/all">Staff management</a></li>
+         <li><a href="http://localhost:3000/transport/displayTransPage">Transport management</a></li>
+         <li><a href="http://localhost:3000/reservation/all">Reservations management</a></li>
 
-                <ul>
-                    <li><a href="fichiersHtml/about.html">About Us</a></li>
-                    <li><a href="fichiersHtml/testimonials.html">Testimonials</a></li>
-                    <li><a href="fichiersHtml/terms.html">Terms</a></li>
-                </ul>
-            </li>
-            <li><a href="fichiersHtml/contact.html">Contact Us</a></li>
-        </ul>
-    </nav>
+         <li><a href="http://localhost:3000/circuit/all">Circuit management</a></li>
+       </ul>
+     </nav>
+
+    <br><br>
     <div id="main">
     <div class="inner">
     <h3>Gestion des hotels <span class="pull-right" style="color: #148599">Les prix dans cette date</span></h3>
 
     <div class="container-fluid">
-
     <div class="table-responsive">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
             <thead  id="head">
@@ -74,27 +67,26 @@
             {% if hotel|length == 0 %}
             Il n'y a aucun hotel à afficher.
             {% else %}
-
             <tbody>
             {% for x in hotel %}
-<tr>
-    <td>{{ x.name }}</td>
-    <td>{{ x.gouvernorat }}</td>
-    <td>{{ x.prix_nuit_single }}</td>
-    <td>{{ x.prix_nuit_double }}</td>
-    <td>{{ x.prix_nuit_triple }}</td>
-    <td> <button class="btn btn-outline-primary" onclick="findOne({{ x.id }})">details </button></td>
-</tr>
-{% endfor %}
-</tbody>
-{% endif %}
-</table>
-</div>
+                <tr>
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.gouvernorat }}</td>
+                    <td>{{ x.prix_nuit_single }}</td>
+                    <td>{{ x.prix_nuit_double }}</td>
+                    <td>{{ x.prix_nuit_triple }}</td>
+                    <td> <button class="btn btn-outline-primary" id="btH" onclick="findOne({{ x.id }})">details </button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
 
 {% endblock %}
 
 
-    {% block javascriptsAtTheEnd %}
+{% block javascriptsAtTheEnd %}
         <script src="/javascripts/jquery.min.js"></script>
         <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="/javascripts/jquery.scrolly.min.js"></script>
@@ -102,10 +94,8 @@
         <script src="/javascripts/main.js"></script>
 
         <script>
-
 function findOne (id){
 location.href="http://localhost:3000/hotel/findOne/"+id
 }
-
 </script>
 {% endblock %}

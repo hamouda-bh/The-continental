@@ -1,6 +1,6 @@
 const sql = require("./db.js");
 
-// constructor
+
 const Hotel = function(hotel) {
     this.name = hotel.name;
     this.gouvernorat = hotel.gouvernorat;
@@ -19,11 +19,11 @@ Hotel.create = (newHotel, result) => {
             result(err, null);
             return;
         }
-
         console.log("created hotel: ", { id: res.insertId, ...newHotel });
         result(null, { id: res.insertId, ...newHotel });
     });
 };
+
 
 Hotel.findById = (hotelId, result) => {
     sql.query(`SELECT * FROM hotel WHERE id = ${hotelId}`, (err, res) => {
@@ -32,16 +32,15 @@ Hotel.findById = (hotelId, result) => {
             result(err, null);
             return;
         }
-
         if (res.length) {
             console.log("found hotel: ", res[0]);
             result(null, res[0]);
             return;
         }
-
         result({ kind: "not_found" }, null);
     });
 };
+
 
 Hotel.findByGouv = (gouvernorat, result) => {
     sql.query(`SELECT * FROM hotel WHERE gouvernorat = ?`,gouvernorat, (err, res) => {
@@ -50,17 +49,15 @@ Hotel.findByGouv = (gouvernorat, result) => {
             result(err, null);
             return;
         }
-
         if (res.length) {
             console.log("found hotel: ", res);
             result(null, res);
             return;
         }
-
-        // not found Customer with the id
         result({ kind: "not_found" }, null);
     });
 };
+
 
 Hotel.findPromos = (name,date, result) => {
     var retour =[];
@@ -80,7 +77,6 @@ Hotel.findPromos = (name,date, result) => {
             prix_nuit_double: item.prix_nuit_double + item.prix_nuit_double*10/100,
             prix_nuit_triple: item.prix_nuit_triple + item.prix_nuit_triple*10/100
         })
-
     }
      if (res.length) {
          console.log("found hotel: ", retour);
@@ -115,6 +111,7 @@ Hotel.findPromos = (name,date, result) => {
     });
 };
 
+
 Hotel.findByNuitSingle = (name, result) => {
     sql.query(`SELECT prix_nuit_single FROM hotel WHERE name = ? `,name, (err, res) => {
         if (err) {
@@ -130,6 +127,7 @@ Hotel.findByNuitSingle = (name, result) => {
         result({ kind: "not_found" }, null);
     });
 };
+
 
 Hotel.findByNuitDouble = (name, result) => {
     sql.query(`SELECT prix_nuit_double FROM hotel WHERE name = ? `,name, (err, res) => {
@@ -147,6 +145,7 @@ Hotel.findByNuitDouble = (name, result) => {
     });
 };
 
+
 Hotel.findByNuitTriple= (name, result) => {
     sql.query(`SELECT prix_nuit_triple FROM hotel WHERE name = ? `,name, (err, res) => {
         if (err) {
@@ -162,6 +161,7 @@ Hotel.findByNuitTriple= (name, result) => {
         result({ kind: "not_found" }, null);
     });
 };
+
 
 Hotel.getAll = result => {
     sql.query("SELECT * FROM hotel", (err, res) => {
@@ -186,7 +186,6 @@ Hotel.updateById = (id, hotel, result) => {
                 result(null, err);
                  return;
             }
-
             if (res.affectedRows == 0) {
                 result({ kind: "not_found" }, null);
                 return;
@@ -205,17 +204,16 @@ Hotel.removeId = (id, result) => {
             result(null, err);
             return;
         }
-
         if (res.affectedRows == 0) {
             // not found Customer with the id
             result({ kind: "not_found" }, null);
             return;
         }
-
         console.log("deleted hotel with id: ", id);
         result(null, res);
     });
 };
+
 
 Hotel.removeName = (name, result) => {
     sql.query("DELETE FROM hotel WHERE name = ?", name, (err, res) => {
@@ -224,17 +222,15 @@ Hotel.removeName = (name, result) => {
             result(null, err);
             return;
         }
-
         if (res.affectedRows == 0) {
-            // not found Customer with the id
             result({ kind: "not_found" }, null);
             return;
         }
-
         console.log("deleted hotel with name: ", name);
         result(null, res);
     });
 };
+
 
 Hotel.removeAll = result => {
     sql.query("DELETE FROM hotel", (err, res) => {
@@ -243,7 +239,6 @@ Hotel.removeAll = result => {
             result(null, err);
             return;
         }
-
         console.log(`deleted ${res.affectedRows} hotels`);
         result(null, res);
     });
