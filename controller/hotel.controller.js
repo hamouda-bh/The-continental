@@ -1,5 +1,6 @@
 const Hotel = require("../models/hotel.model.js");
-// Create and Save a new Customer
+
+
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -7,9 +8,6 @@ exports.create = (req, res) => {
             message: "Content can not be empty!"
         });
     }
-
-    // Create a Customer
-
 
     const hotel = new Hotel({
         name: req.body.name,
@@ -22,7 +20,7 @@ exports.create = (req, res) => {
         prix_nuit_triple:req.body.prix_nuit_triple
     });
 
-    Hotel.create(hotel, (err, data) => {
+Hotel.create(hotel, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
@@ -37,6 +35,7 @@ exports.ahla = (req, res) => {
    res.render('hotelerie/addHotel');
 };
 
+
 exports.findAll = (req, res) => {
     Hotel.getAll((err, rows) => {
         if (err)
@@ -48,7 +47,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single hotel with a customerId
+
 exports.findOne = (req, res) => {
     Hotel.findById(req.params.hotelId, (err, data) => {
         if (err) {
@@ -66,6 +65,7 @@ exports.findOne = (req, res) => {
     });
 };
 
+
 exports.findGouv = (req, res) => {
     Hotel.findByGouv(req.params.gouvernorat, (err, data) => {
         if (err) {
@@ -81,6 +81,7 @@ exports.findGouv = (req, res) => {
         }   else res.render('hotelerie/findGouv', {hotels :data});
     });
 };
+
 
 exports.findPromos = (req, res) => {
     Hotel.findPromos(req.params.name,req.params.date,(err, data) => {
@@ -98,6 +99,7 @@ exports.findPromos = (req, res) => {
     });
 };
 
+
 exports.findByNuitSingle= (req, res) => {
     Hotel.findByNuitSingle(req.params.name, (err, data) => {
         if (err) {
@@ -113,6 +115,8 @@ exports.findByNuitSingle= (req, res) => {
         } else res.render('hotelerie/prixNuitHotel', {hotel :data});
     });
 };
+
+
 exports.findByNuitDouble= (req, res) => {
     Hotel.findByNuitDouble(req.params.name, (err, data) => {
 
@@ -129,6 +133,8 @@ exports.findByNuitDouble= (req, res) => {
         } else res.render('hotelerie/prixNuitdouble', {hotel :data});
     });
 };
+
+
 exports.findByNuitTriple= (req, res) => {
     Hotel.findByNuitTriple(req.params.name, (err, data) => {
         if (err) {
@@ -167,6 +173,8 @@ exports.update = (req, res) => {
         }
     );
 };
+
+
 exports.deleteId = (req, res) => {
     Hotel.removeId(req.params.hotelId, (err, data) => {
         if (err) {
@@ -184,7 +192,7 @@ exports.deleteId = (req, res) => {
 
     });
 };
-//delete name
+
 
 exports.deleteName = (req, res) => {
     Hotel.removeName(req.params.name, (err, data) => {
@@ -202,7 +210,7 @@ exports.deleteName = (req, res) => {
     });
 };
 
-// Delete all Customers from the database.
+
 exports.deleteAll = (req, res) => {
     Hotel.removeAll((err, data) => {
         if (err)
